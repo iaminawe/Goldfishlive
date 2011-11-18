@@ -1,0 +1,16 @@
+# $Id: CHANGELOG.txt,v 1.4 2010/02/11 04:52:45 iva2k Exp $
+
+itweak_upload 6.x-1.x-dev
+-------------------------
+SA-CONTRIB-2010-003 by iva2k: remove XSS vulnerability in file names
+
+itweak_upload 6.x-1.1, 2009-07-29
+---------------------------------
+[NOISSUE] by iva2k: Added margin-right to attachments div in itweak_upload.css (for cleaner advanced forum styling).
+[#520286] by jackinloadup: Fixed .eps icons not showing up.
+[NOISSUE] by iva2k: Added missing psd.png for mime-16.
+
+itweak_upload 6.x-1.0, 2009-07-03
+---------------------------------
+[NOISSUE] by iva2k: Initial commit, First Release.
+[NOISSUE] by iva2k: Initial commit, First Release - apply theme tweaks to comment attachments.

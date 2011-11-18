@@ -1,0 +1,6 @@
+; $Id:
+name = "Simplenews Statistics"
+description = "Gathers newsletter statistics"
+dependencies[] = simplenews
+package = Mail
+core = 6.x

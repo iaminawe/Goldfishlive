@@ -1,0 +1,69 @@
+<?php
+// $Id: soundmanager2.install,v 1.1.2.3.2.5 2010/01/11 20:02:43 davebv Exp $
+
+/**
+ * Implementation of hook_requirements()
+ */
+function soundmanager2_requirements($phase) {
+
+  $t = get_t();
+
+  $requirements = array();
+  if ($phase == 'runtime') {
+    // Test availability of SoundManager2
+    $requirements['soundmanager2']['title'] = $t('SoundManager2');
+    $sm2_path = variable_get('sm2-path', 'sites/all/libraries/soundmanager2');
+    $sm2_swf = $sm2_path . '/swf/';
+    $sm2_script = $sm2_path . '/script/soundmanager2.js';
+    if (file_exists($sm2_path) && file_exists($sm2_swf) && file_exists($sm2_script) ) {
+      $requirements['soundmanager2']['value'] = _soundmanager2_get_version($sm2_script) ;
+      $requirements['soundmanager2']['severity'] = REQUIREMENT_OK ;
+    }
+    else {
+          $requirements['soundmanager2']['value'] = $t('Soundmanager2 Not found');
+          $requirements['soundmanager2']['description'] = $t('You must install <a href="@soundmanager2">SoundManager2</a> to %sm2dir, or <a href="@sm2settings">configure its installation path</a>.', array('@soundmanger2' => 'http://www.schillmania.com/projects/soundmanager2/doc/download/', '%sm2dir' => $sm2_path, '@sm2settings' => url('admin/settings/soundmanager2')));
+          $requirements['soundmanager2']['severity'] = REQUIREMENT_ERROR;
+    }
+    return $requirements;
+  }
+
+  if ($phase == 'install') {
+    $requirements['soundmanager2']['title'] = $t('SoundManager2');
+    $requirements['soundmanager2']['value'] = $t('SoundManager2: remember!');
+    $requirements['soundmanager2']['description'] = $t('You must install <a href="@soundmanager2">SoundManager2</a> to %sm2dir, or <a href="@sm2settings">configure its installation path</a>.', array('@soundmanger2' => 'http://www.schillmania.com/projects/soundmanager2/doc/download/', '%sm2dir' => $sm2_path, '@sm2settings' => url('admin/settings/soundmanager2')));
+    $requirements['soundmanager2']['severity'] = REQUIREMENT_INFO;
+    return $requirements;
+  }
+}
+/**
+ * @file
+ * Implementation of hook_install().
+ */
+function soundmanager2_install() {
+  variable_set('sm2-debug-mode', false);
+  variable_set('sm2-path', 'sites/all/libraries/soundmanager2');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function soundmanager2_uninstall() {
+  variable_del('sm2-debug-mode');
+  variable_del('sm2-path');
+}
+
+/**
+ * Implementation of hook_enable().
+ *
+ * Notify content module when this module is enabled.
+ */
+function soundmanager2_enable() {
+}
+
+/**
+ * Implementation of hook_disable().
+ *
+ * Notify content module when this module is disabled.
+ */
+function soundmanager2_disable() {
+}

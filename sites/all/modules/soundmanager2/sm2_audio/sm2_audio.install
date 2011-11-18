@@ -1,0 +1,91 @@
+<?php
+// $Id: sm2_audio.install,v 1.1.2.2 2009/12/14 19:50:00 davebv Exp $
+
+// Notify CCK when this module is enabled, disabled, installed, 
+// and uninstalled so CCK can do any necessary preparation or cleanup.
+/**
+ * @file
+ * Implementation of hook_install().
+ */
+function sm2_audio_install() {
+//  drupal_load('module', 'content');
+//  content_notify('install', 'sm2_audio');
+  variable_set('sm2_audio_waveform', true);
+  variable_set('sm2_audio_eq', true);
+  variable_set('sm2_audio_amplifier', true);
+  //variable_set('sm2_audio_circle_diameter', '256');
+  //variable_set('sm2_audio_waveform_thickness', '50');
+  //variable_set('sm2_audio_wave_downsample','4');
+  //variable_set('sm2_audio_eq_thickness', '20');
+  //variable_set('sm2_audio_eq_downsample', '5');
+
+  //variable_set('sm2_audio_wf_position', 0);
+  //variable_set('sm2_audio_eq_position', 1);
+  //variable_set('sm2_audio_waveform_color', '#0099ff');
+  //variable_set('sm2_audio_eq_color', '#339933');
+  //variable_set('sm2_audio_loaded_color', '#ccc');  
+  //variable_set('sm2_audio_progress_color', '#ff33ff');  
+  //variable_set('sm2_audio_background_color', '#eee');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function sm2_audio_uninstall() {
+//  drupal_load('module', 'content');
+//  content_notify('uninstall', 'sm2_audio');
+  variable_del('sm2_audio_waveform');
+  variable_del('sm2_audio_eq');
+  variable_del('sm2_audio_amplifier');
+  //variable_del('sm2_audio_circle_diameter');
+  //variable_del('sm2_audio_waveform_thickness');
+  //variable_del('sm2_audio_wave_downsample');
+  //variable_del('sm2_audio_eq_thickness');
+  //variable_del('sm2_audio_eq_downsample');
+
+  //variable_del('sm2_audio_wf_position');
+  //variable_del('sm2_audio_eq_position');
+  //variable_del('sm2_audio_waveform_color');
+  //variable_del('sm2_audio_eq_color');
+  //variable_del('sm2_audio_loaded_color');  
+  //variable_del('sm2_audio_progress_color');  
+  //variable_del('sm2_audio_background_color');
+}
+
+/**
+ * Implementation of hook_enable().
+ *
+ * Notify content module when this module is enabled.
+ */
+function sm2_audio_enable() {
+//  drupal_load('module', 'content');
+//  content_notify('enable', 'sm2_audio');
+}
+
+/**
+ * Implementation of hook_disable().
+ *
+ * Notify content module when this module is disabled.
+ */
+function sm2_audio_disable() {
+//  drupal_load('module', 'content');
+//  content_notify('disable', 'sm2_audio');
+}
+
+function sm2_audio_update_1 () {
+  variable_del('sm2_audio_circle_diameter');
+  variable_del('sm2_audio_waveform_thickness');
+  variable_del('sm2_audio_wave_downsample');
+  variable_del('sm2_audio_eq_thickness');
+  variable_del('sm2_audio_eq_downsample');
+
+  variable_del('sm2_audio_wf_position');
+  variable_del('sm2_audio_eq_position');
+  variable_del('sm2_audio_waveform_color');
+  variable_del('sm2_audio_eq_color');
+  variable_del('sm2_audio_loaded_color');  
+  variable_del('sm2_audio_progress_color');  
+  variable_del('sm2_audio_background_color');
+}
+
+

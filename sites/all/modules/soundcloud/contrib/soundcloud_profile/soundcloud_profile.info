@@ -1,0 +1,11 @@
+name = SoundCloud profile page
+description = The SoundCloud profile page module enriches the SoundCloud user profile with soundCloud information.
+core = 6.x
+package = SoundCloud
+dependencies[] = soundcloud
+; Information added by drupal.org packaging script on 2010-07-11
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "soundcloud"
+datestamp = "1278835746"
+

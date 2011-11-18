@@ -1,0 +1,11 @@
+name = SoundCloud Commerce
+description = The SoundCloud Commerce
+core = 6.x
+package = SoundCloud
+dependencies[] = soundcloud
+; Information added by drupal.org packaging script on 2010-05-15
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "soundcloud"
+datestamp = "1273882562"
+

@@ -1,0 +1,7 @@
+; $Id: sm2_audio.info,v 1.1.2.1 2009/12/13 19:24:20 davebv Exp $
+name = SoundManager 2 audio player
+description = Defines a new player for audio module.
+dependencies[] = audio
+dependencies[] = soundmanager2
+package = Audio
+core = 6.x

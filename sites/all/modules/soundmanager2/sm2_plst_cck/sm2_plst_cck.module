@@ -1,0 +1,213 @@
+<?php
+
+//function sm2_plst_cck_init() {
+//  // Add module Styles
+//  drupal_add_css(drupal_get_path('module', 'soundmanager2') .'/players/page-player.css');
+//  // Add modules scripts
+//  drupal_add_js(drupal_get_path('module', 'soundmanager2') .'/players/page-player.js');
+//}
+
+//function sm2_plst_cck_perm() {
+//  return array('administer sm2_plst_cck');
+//}
+
+// Define a block for debug information of the sm2_plst_cck
+//function sm2_plst_cck_block($op = 'list', $delta = 0, $edit = array()) {
+//  if($op == "list") {
+//    $block = array();
+//    $block[0]["info"] = t('SoundManager2 Debug');
+//    return $block;
+//  }
+//  else if ($op == "view") {
+//    //if (variable_get('sm2-debug-mode',false)) {
+//    cache_clear_all();
+//    //};
+//    $block_content = '<div id="soundmanager-debug"><p>Debug block for SoundManager2</p></div>';
+//    $block['subject'] = t('SoundManager2 Debug');
+//    $block['content'] = $block_content;
+//    return $block;
+//  }
+//}
+
+// Admin page
+//function sm2_plst_cck_admin() {
+//  $form = array();
+//
+//  $form['sm2-debug-mode'] = array(
+//    '#type' => 'checkbox',
+//    '#title' => t('Activate Debug Mode'),
+//    '#default_value' => variable_get('sm2-debug-mode', false),
+//    '#description' => t("If checked, the sm2 module will output debug text in the block."),
+//  );
+//  $form['sm2-path'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Path to sm2_plst_cck files'),
+//    '#default_value' => variable_get('sm2-path', 'sites/all/shared/sm2_plst_cck'),
+//    '#description' => t('Path to the sm2_plst_cck files. No trailing and beggining backslash. Download SoundManager2 from <a href="http://www.schillmania.com/projects/soundmanager2/doc/download/">here</a>.'),
+//    '#size' => 60,
+//    '#maxlength' => 128,
+//    '#required' => TRUE,
+//  );
+//
+//  return system_settings_form($form);
+//}
+
+
+//function sm2_plst_cck_menu() {
+//  $items = array();
+//
+//  $items['admin/settings/soundmanager2/sm2_plst_cck'] = array(
+//    'title' => 'SoundManager2 module settings',
+//    'description' => 'Setup SM2 module (more info about sm2 in <a href="http://schillmania.com/projects/sm2_plst_cck">soundmanager2</a>)',
+//    'page callback' => 'drupal_get_form',
+//    'page arguments' => array('sm2_plst_cck_admin'),
+//    'access arguments' => array('administer sm2'),
+//    // 'type' => MENU_NORMAL_ITEM,
+//    'type' => MENU_LOCAL_TASK,
+//  );
+//  return $items;
+//
+//}
+
+//function sm2_plst_cck_admin_validate($form, &$form_state) {
+  // $sm_path = trim($form_state['values']['sm2-path'], '/');
+  // $form_state['values']['sm2-path'] = $sm_path ;
+  // $sm_path_swf = $sm_path .'/swf';
+  // $sm_path_script = $sm_path .'/script';
+
+  // file_check_directory($sm_path, 0, 'sm2-path');
+  // file_check_directory($sm_path_swf, 0, 'sm2-path');
+  // file_check_directory($sm_path_script, 0, 'sm2-path');
+//}
+
+
+//==========================================//
+// DEFINING A WIDGETS
+//==========================================//
+//function sm2_plst_cck_widget_info (){
+//
+//  return array(
+//    'sm2_plst_cck_select' => array(
+//      'label' => t('SM2 Select list'),
+//      'field types' => array('nodereference'),
+//      'multiple values' => CONTENT_HANDLE_MODULE,
+//      'callbacks' => array(
+//        'default value' => CONTENT_CALLBACK_DEFAULT,
+//      ),
+//    ),
+//    'sm2_plst_cck_buttons' => array(
+//      'label' => t('Check boxes/radio buttons'),
+//      'field types' => array('text', 'number_integer', 'number_decimal', 'number_float'),
+//      'multiple values' => CONTENT_HANDLE_MODULE,
+//      'callbacks' => array(
+//        'default value' => CONTENT_CALLBACK_DEFAULT,
+//      ),
+//    ),
+//    'sm2_plst_cck_onoff' => array(
+//      'label' => t('Single on/off checkbox'),
+//      'field types' => array('text', 'number_integer', 'number_decimal', 'number_float'),
+//      'multiple values' => CONTENT_HANDLE_MODULE,
+//      'callbacks' => array(
+//        'default value' => CONTENT_CALLBACK_DEFAULT,
+//      ),
+//    ),
+//  );
+//}
+
+//==========================================//
+// DEFINING A FORMATTER
+//==========================================//
+
+/**
+ * Implementation of hook_theme().
+ */
+function sm2_plst_cck_theme() {
+  $formatters_filefield = array();
+  $formatters_audio = array();
+  if (module_exists('audio')) {
+    $formatters_audio = array(
+      'sm2_plst_cck_formatter_audio_sm2' => array(
+        'arguments' => array('element' => $element),
+        'template' => 'sm2_plst_cck_audio',
+      ),
+      'sm2_plst_cck_formatter_ui360_audio_sm2' => array(
+        'arguments' => array('element' => $element),
+        'template' => 'sm2_plst_cck_audio_ui360',
+      ),
+    );
+  }
+  if (module_exists('filefield')) {
+    $formatters_filefield = array(
+      'sm2_plst_cck_formatter_ff_sm2' => array(
+        'arguments' => array('element' => $element),
+        'template' => 'sm2_plst_cck_ff',
+      ),
+      'sm2_plst_cck_formatter_ui360_ff_sm2' => array(
+        'arguments' => array('element' => $element),
+        'template' => 'sm2_plst_cck_ff_ui360',
+      ),
+    );
+  }
+  $formatters = array_merge($formatters_filefield, $formatters_audio);
+  return $formatters;
+}
+
+/**
+ * Implementation of hook_field_formatter_info().
+ * 
+ * All fields should have a 'default' formatter.
+ * Any number of other formatters can be defined as well.
+ * It's nice for there always to be a 'plain' option
+ * for the raw value, but that is not required.
+ * 
+ */
+function sm2_plst_cck_field_formatter_info() {
+
+  $formatterinfo_filefield = array();
+  $formatterinfo_audio = array();
+  if (module_exists('filefield')) {
+    $formatterinfo_filefield = array(
+      // The machine name of the formatter.
+      'ff_sm2' => array(
+        // The human-readable label shown on the Display 
+        // fields screen.
+        'label' => t('SoundManager 2, page-player style'),
+        // An array of the field types this formatter 
+        // can be used on.
+        'field types' => array('filefield'),
+        // CONTENT_HANDLE_CORE:   CCK will pass the formatter
+        // a single value.
+        // CONTENT_HANDLE_MODULE: CCK will pass the formatter
+        // an array of all the values. None of CCK's core 
+        // formatters use multiple values, that is an option
+        // available to other modules that want it.
+        //'multiple values' => CONTENT_HANDLE_CORE,
+        'multiple values' => CONTENT_HANDLE_MODULE,
+      ),
+      'ui360_ff_sm2' => array(
+        'label' => t('SoundManager 2, ui360 style'),
+        'field types' => array('filefield'),
+        'multiple values' => CONTENT_HANDLE_MODULE,
+      ),
+ 
+    );
+  }
+  if (module_exists('audio')) {
+    $formatterinfo_audio = array(
+      'audio_sm2' => array(
+        'label' => t('Audio node. SM2 page-player style'),
+        'field types' => array('nodereference'),
+        'multiple values' => CONTENT_HANDLE_MODULE,
+      ),
+      'ui360_audio_sm2' => array(
+        'label' => t('Audio node. SM2 ui360 style'),
+        'field types' => array('nodereference'),
+        'multiple values' => CONTENT_HANDLE_MODULE,
+      ),
+    );
+  }
+  $formatterinfo = array_merge($formatterinfo_filefield, $formatterinfo_audio);
+  return $formatterinfo;
+
+}
+

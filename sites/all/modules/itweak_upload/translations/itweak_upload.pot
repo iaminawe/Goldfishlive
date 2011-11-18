@@ -1,0 +1,62 @@
+# $Id: itweak_upload.pot,v 1.1 2009/07/04 06:02:22 iva2k Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  itweak_upload.module: n/a
+#  itweak_upload.js: n/a
+#  itweak_upload.info: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-07-03 22:57-0700\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: itweak_upload.module:24
+msgid "Attach files to this @type"
+msgstr ""
+
+#: itweak_upload.module:27
+msgid "Images are larger than %resolution will be resized. "
+msgstr ""
+
+#: itweak_upload.module:27
+msgid "Files must be smaller than %filesize and have one of the following extensions: %extensions."
+msgstr ""
+
+#: itweak_upload.module:121 itweak_upload.js:0
+msgid "Remove"
+msgstr ""
+
+#: itweak_upload.module:127
+msgid "List"
+msgstr ""
+
+#: itweak_upload.info:0
+msgid "iTweak Upload"
+msgstr ""
+
+#: itweak_upload.info:0
+msgid "Tweak file upload form."
+msgstr ""
+
+#: itweak_upload.info:0
+msgid "Site Tweaks"
+msgstr ""
+
+#: itweak_upload.js:0;0
+msgid "Rename"
+msgstr ""
+
+#: itweak_upload.js:0
+msgid "Cancel"
+msgstr ""
+

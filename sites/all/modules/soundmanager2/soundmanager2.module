@@ -1,0 +1,182 @@
+<?php
+
+function soundmanager2_init() {
+
+  drupal_add_js('var sm2_mod_url = \''. base_path() . variable_get('sm2-path', 'sites/all/libraries/soundmanager2') .'/swf/' .'\' ;', 'inline');
+  drupal_add_js('var sm2_imageRoot = \''. base_path() . drupal_get_path('module', 'soundmanager2') .'/' .'\' ;', 'inline');
+  
+  // Add modules scripts
+  if (variable_get('sm2-debug-mode',false)) {
+    drupal_add_js(variable_get('sm2-path', 'sites/all/libraries/soundmanager2') .'/script/soundmanager2.js');
+    drupal_add_js("var sm2_var_debug = true ;", 'inline');
+  } else {
+    drupal_add_js(variable_get('sm2-path', 'sites/all/libraries/soundmanager2') .'/script/soundmanager2-nodebug-jsmin.js');
+    drupal_add_js("var sm2_var_debug = false ;", 'inline');
+  }
+  drupal_add_js(drupal_get_path('module', 'soundmanager2') .'/soundmanager2_config.js');
+}
+
+/** Implementation of hook_load
+ */
+//function soundmanager2_load($node) {
+//  file_check_directory($sm_path, 0, 'sm2-path');
+//  file_check_directory($sm_path_swf, 0, 'sm2-path');
+//  file_check_directory($sm_path_script, 0, 'sm2-path');
+//}
+
+/**
+ * Implementation of hook_perm()
+ *
+ */
+function soundmanager2_perm() {
+  return array('administer sm2');
+}
+// Define a block for debug information of the soundmanager2
+function soundmanager2_block($op = 'list', $delta = 0, $edit = array()) {
+  if($op == "list") {
+    $block = array();
+    $block[0]["info"] = t('SoundManager2 Debug');
+    return $block;
+  }
+  else if ($op == "view") {
+    //if (variable_get('sm2-debug-mode',false)) {
+      cache_clear_all();
+    //};
+    $block_content = '<div id="soundmanager-debug"><p>Debug block for SoundManager2</p></div>';
+    $block['subject'] = t('SoundManager2 Debug');
+    $block['content'] = $block_content;
+    return $block;
+  }
+}
+
+// Admin page
+function soundmanager2_admin() {
+  $form = array();
+
+  $form['sm2-debug-mode'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Activate Debug Mode'),
+    '#default_value' => variable_get('sm2-debug-mode', false),
+    '#description' => t("If checked, the sm2 module will output debug text in the block."),
+  );
+  $form['sm2-path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Path to soundmanager2 files'),
+    '#default_value' => variable_get('sm2-path', 'sites/all/libraries/soundmanager2'),
+    '#description' => t('Path to the soundmanager2 files. No trailing and beggining backslash. Download SoundManager2 from <a href="http://www.schillmania.com/projects/soundmanager2/doc/download/">here</a>.'),
+    '#size' => 60,
+    '#maxlength' => 128,
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+function soundmanager2_menu() {
+  $items = array();
+
+  $items['admin/settings/soundmanager2'] = array(
+    'title' => 'SoundManager2 module settings',
+    'description' => 'Setup SM2 module (more info about sm2 in <a href="http://schillmania.com/projects/soundmanager2">soundmanager2</a>)',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('soundmanager2_admin'),
+    'access arguments' => array('administer sm2'),
+    //'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/settings/soundmanager2/main'] = array(
+    'title' => 'SoundManager2',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => '-10',
+  );
+  if (module_exists('sm2_audio')) {
+    $items['admin/settings/soundmanager2/sm2_audio'] = array(
+    //$items['admin/settings/sm2_audio'] = array(
+      'title' => 'SM2 Audio player settings',
+      'description' => 'Setup SM2 audio player',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('sm2_audio_admin'),
+      'access arguments' => array('administer sm2_audio'),
+      //'type' => MENU_NORMAL_ITEM,
+      'type' => MENU_LOCAL_TASK,
+    );
+  }
+ 
+  return $items;
+
+}
+
+function soundmanager2_admin_validate($form, &$form_state) {
+  $sm_path = trim($form_state['values']['sm2-path'], '/');
+  $form_state['values']['sm2-path'] = $sm_path ;
+  $sm_path_swf = $sm_path .'/swf';
+  $sm_path_script = $sm_path .'/script';
+
+  _soundmanager2_check_directory_readable($sm_path, 0, 'sm2-path');
+  _soundmanager2_check_directory_readable($sm_path_swf, 0, 'sm2-path');
+  _soundmanager2_check_directory_readable($sm_path_script, 0, 'sm2-path');
+}
+/**
+ * Check for files to be installed in the right place
+ */
+function _soundmanager2_library_installed() {
+}
+
+/**
+ * Get the version of the soundmanager2
+ *
+ */
+function _soundmanager2_get_version($sm2_script = 'sites/all/libraries/soundmanager2/script/soundmanager2.js') {
+  if (file_exists($sm2_script) ) {
+    $lines = file($sm2_script);
+    foreach ($lines as $line) {
+      if (preg_match("/V(.*)$/", $line) )
+      {
+        $version_str = check_plain(ereg_replace( "^(.*) ", "", $line )) ;
+        break;
+      }
+    }
+    unset($lineas);
+    unset($linea);
+  }
+  return $version_str;
+}
+
+/**
+ * Function to check if directory exists and is readable
+ * Slightly modified version of file_check_directory()
+ *
+ */
+function _soundmanager2_check_directory_readable(&$directory, $mode = 0, $form_item = NULL) {
+  $directory = rtrim($directory, '/\\');
+
+  // Check if directory exists.
+  if (!is_dir($directory)) {
+    if (($mode & FILE_CREATE_DIRECTORY) && @mkdir($directory)) {
+      drupal_set_message(t('The directory %directory has been created.', array('%directory' => $directory)));
+      @chmod($directory, 0775); // Necessary for non-webserver users.
+    }
+    else {
+      if ($form_item) {
+        form_set_error($form_item, t('The directory %directory does not exist.', array('%directory' => $directory)));
+      }
+      return FALSE;
+    }
+  }
+
+  if ((file_directory_path() == $directory || file_directory_temp() == $directory) && !is_file("$directory/.htaccess")) {
+    $htaccess_lines = "SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006\nOptions None\nOptions +FollowSymLinks";
+    if (($fp = fopen("$directory/.htaccess", 'w')) && fputs($fp, $htaccess_lines)) {
+      fclose($fp);
+      chmod($directory .'/.htaccess', 0664);
+    }
+    else {
+      $variables = array('%directory' => $directory, '!htaccess' => '<br />'. nl2br(check_plain($htaccess_lines)));
+      form_set_error($form_item, t("Security warning: Couldn't write .htaccess file. Please create a .htaccess file in your %directory directory which contains the following lines: <code>!htaccess</code>", $variables));
+      watchdog('security', "Security warning: Couldn't write .htaccess file. Please create a .htaccess file in your %directory directory which contains the following lines: <code>!htaccess</code>", $variables, WATCHDOG_ERROR);
+    }
+  }
+
+  return TRUE;
+
+}

@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <meta name="description" content="SourceForge.net. Fast, secure and free downloads from the largest Open Source applications and software directory" />
+    <meta name="keywords" content="Open Source, Open Source Software, Development, Community, Source Code, Secure,  Downloads, Free Software" />
+    
+    <title>Download getID3() from SourceForge.net</title>
+    <link rel="shortcut icon" href="http://c.fsdn.com/con/img/favicon.ico" />
+    
+    <link rel="stylesheet" href="http://c.fsdn.com/con/css/reset-fonts-grids.css?2.7.0b" type="text/css" />
+    <link rel="stylesheet" href="http://c.fsdn.com/con/css/global.css?1246658875" type="text/css" />
+    <link rel="stylesheet" href="http://c.fsdn.com/con/css/jquery-ui-1.7.2.custom.css?1246658875" type="text/css" />
+    
+    
+<style type="text/css">
+    .toggle-immersion { display: none; }
+</style>
+
+    
+     
+
+    
+    
+    
+    
+    <script src="http://c.fsdn.com/con/js/jquery-1.3.2.min.js?1246658875" type="text/javascript"></script>
+    <script src="http://c.fsdn.com/con/js/global.js?1246658875" type="text/javascript" ></script>
+    <script src="http://c.fsdn.com/con/js/jquery-ui-1.7.2.custom.min.js?1246658875"></script>
+    <script src="http://c.fsdn.com/con/js/jquery.clearinginput.js?1246658875"></script>
+    <script src="http://c.fsdn.com/con/js/jcarousellite_1.0.1.min.js?1246658875"></script>
+    
+    
+        
+<!-- DoubleClick Random Number -->
+<script language="JavaScript" type="text/javascript">
+  var dfp_ord=Math.random()*10000000000000000;
+  var dfp_tile = 1;
+  var dfp_ptile = 1;
+  var adspot = '';
+  
+  var ad_page = '/project/downloading.php';
+  
+  var adid = '';
+  var sponsored = '';
+  var ad_topics = '';
+
+  
+    
+  var page_id = 'pg_dwnld';
+    
+  var ad_zone = 'none';
+  
+  if (page_id) {
+    ad_prefix = 'cons_' +  page_id + '_' + ad_zone + '_';
+  } else {
+    ad_prefix = 'cons_' +  ad_zone + '_';
+  }
+  
+  var ad_logged_in = 0;
+  var ad_search = 0 
+  var immersion_adcode = "";
+</script>
+<!-- End DoubleClick Random Number -->
+
+<script language="Javascript" type="text/javascript">
+  var google_page_url = 'http://sourceforge.net/projects/getid3';
+  var sourceforge_project_name = 'getID3()';
+  var sourceforge_project_description = 'getID3 is a PHP script that extracts useful information such as ID3 tags bitrate playtime etc from MP3s other multimedia file formats Ogg WMA WMV ASF WAV AVI AAC VQF FLAC MusePack Real QuickTime Monkey s Audio MIDI and more ';
+  
+  
+    var google_hints = 'analysis,';
+    ad_topics = 'tpc=getid3;tpc=analysis;aud=developers;';
+  
+</script>
+
+    
+    
+
+<script src="http://c.fsdn.com/con/js/download.js?1246658875"></script>
+
+ 
+<script language="Javascript" type="text/javascript">
+  adspot = ad_prefix + 'p77_immersion';
+
+  document.write('<script src="http://ad.doubleclick.net/adj/ostg.sourceforge/'+adspot+';pg=/project/downloading.php;psrch=0;logged_in=0;tile='+dfp_tile+';'+ad_topics + 'ord='+dfp_ord+'?" type="text/javascript"><\/script>'); 
+	
+  
+</script>
+
+    <script src="https://static.sourceforge.net/include/coremetrics/v40/eluminate.js"></script>
+    <script src="https://static.sourceforge.net/include/coremetrics/cmdatatagutils.js"></script>
+    <!-- BEGIN: Google Analytics -->
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        pageTracker = _gat._getTracker("UA-32013-6");
+        pageTracker._initData();
+    </script>
+    <!-- END: Google Analytics -->
+  </head>
+  
+  <body id="c1"  class="short-head" >
+    <!--[if IE 7]><div id="ie7only"><![endif]-->
+    <!--[if IE 6]><div id="ie6only"><![endif]-->
+    <!--[if IE]><div id="ieonly"><![endif]-->
+    <div id="doc3">
+      <div id="hd">
+	<div class="yui-b">
+          
+<div class="toggle-nonimmersion">
+    
+        
+        <div id="fad85">
+<script language="Javascript" type="text/javascript">
+    adspot = ad_prefix + 'p85_skybox';
+ if(adid !="") adspot+= ";comp=" +adid +"";
+    if (immersion_adcode == "") {
+    document.write('<script src="http://ad.doubleclick.net/adj/ostg.sourceforge/'+adspot+';pg='+ad_page+';psrch=' + ad_search +';logged_in=0;tile='+dfp_tile+';'+ad_topics + 'ord='+dfp_ord+'?" type="text/javascript"><\/script>'); 
+    }
+</script></div>
+        
+          
+<p id="metaNav">
+    
+        <strong>Welcome, Guest!</strong>
+        <a href="https://sourceforge.net/account/login.php">Log In</a> | <a href="/account/registration/">Create Account</a>
+    
+</p>
+	  <a href="/" id="logo">Find and develop open-source software</a>
+  	  <div class="yui-g">
+      	    <div class="yui-u first">
+      	      <ul id="nav">
+               	<li class="first"><a href="/softwaremap/">Find Software</a></li>
+               	<li class="selected"><a href="/develop/">Develop</a></li>
+               	<li><a href="/community/">Community</a></li>
+               	<li><a href="http://p.sf.net/sourceforge/getsupport">Site Support</a></li>
+       	        
+              	<li class="last"><a href="http://p.sf.net/sourceforge/about">About</a></li>
+              </ul>
+      	    </div>
+       	    <div class="yui-u">
+	      <div class="search">
+		<form action="/search/" method="get" name="searchform" id="searchform">
+		  <input type="hidden" name="type_of_search" value="soft" />
+		  <input type="text" class="text clear hint" name="words" id="words" value="enter keyword" />
+		  <span class="yui-button yui-push-button default">
+		    <span class="first-child">
+		      <button type="submit" value="Search">Search</button>
+		    </span>
+		  </span>
+		</form>
+	      </div>
+	    </div>
+	  </div>
+          
+</div>
+<div class="toggle-immersion">
+    
+<div class="downloading">
+    
+    <div class="yui-g">
+        <div class="yui-u first">
+            <a href="/" id="logo">Find and develop open source software</a>
+        </div>
+        <div class="yui-u">
+            
+<ul class="actions">
+    <li class="icon share">
+        <!-- AddThis Button BEGIN -->
+        <a href="http://www.addthis.com/bookmark.php?v=250" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()">Share</a>
+        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js?pub=sfnet"></script>
+<script type="text/javascript">
+var addthis_options = 'email, stumbleupon, reddit, slashdot, more';
+var addthis_exclude = 'print';
+</script>
+
+        <!-- AddThis Button END -->
+    </li>
+    
+    
+    
+    <li class="icon donate"><a href="/project/project_donations.php?group_id=55859">Donate</a></li>
+    
+</ul>
+
+        </div>
+    </div>
+    <div class="yui-g deck">
+        <div class="yui-u first">
+            <h1>Your <a href="/projects/getid3/">getID3()</a> download will start shortly&#8230;</h1>
+        </div>
+        <div class="yui-u">
+            <p>Problems with the download? Please use this <a href="http://downloads.sourceforge.net/sourceforge/getid3/getid3-1.7.7.zip?use_mirror=ufpr">direct link</a> or try another <a href="/settings/mirror_choices?projectname=getid3&amp;filename=getid3-1.7.7.zip" title="A mirror is an exact copy of a download available in multiple locations around the world.  Select the one closest to your location." class="mirror">mirror</a>.</p>
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+	</div>
+      </div>
+    
+
+    <div id="bd" class="inner-bd">
+        <div id="doc4" class="yui-t2">
+            <div id="messages">
+                
+                
+                
+            </div>
+
+            
+<div class="sfBox b-hot toggle-nonimmersion">
+    
+<div class="downloading">
+    
+    <div class="yui-gc">
+        <div class="yui-u first">
+            <h1>Your <a href="/projects/getid3/">getID3()</a> download will start shortly&#8230;</h1>
+        </div>
+        <div class="yui-u">
+            
+<ul class="actions">
+    <li class="icon share">
+        <!-- AddThis Button BEGIN -->
+        <a href="http://www.addthis.com/bookmark.php?v=250" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()">Share</a>
+        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js?pub=sfnet"></script>
+<script type="text/javascript">
+var addthis_options = 'email, stumbleupon, reddit, slashdot, more';
+var addthis_exclude = 'print';
+</script>
+
+        <!-- AddThis Button END -->
+    </li>
+    
+    
+    
+    <li class="icon donate"><a href="/project/project_donations.php?group_id=55859">Donate</a></li>
+    
+</ul>
+
+        </div>
+    </div>
+    <p>Problems with the download? Please use this <a href="http://downloads.sourceforge.net/sourceforge/getid3/getid3-1.7.7.zip?use_mirror=ufpr">direct link</a> or try another <a href="/settings/mirror_choices?projectname=getid3&amp;filename=getid3-1.7.7.zip" title="A mirror is an exact copy of a download available in multiple locations around the world.  Select the one closest to your location." class="mirror">mirror</a>.</p>
+    
+</div>
+
+    
+    <div class="ads downloadAds">
+        <p class="thanks">from our advertisers</p>
+        <div class="yui-g">
+            <div class="yui-u first">
+                <div class="ads">
+<script language="Javascript" type="text/javascript">
+    adspot = ad_prefix + 'p83_medrec';
+ if(adid !="") adspot+= ";comp=" +adid +"";
+    if (immersion_adcode == "") {
+    document.write('<script src="http://ad.doubleclick.net/adj/ostg.sourceforge/'+adspot+';pg='+ad_page+';psrch=' + ad_search +';logged_in=0;tile='+dfp_tile+';'+ad_topics + 'ord='+dfp_ord+'?" type="text/javascript"><\/script>'); 
+    }
+</script></div><br />
+                <div class="ads">
+<script language="Javascript" type="text/javascript">
+    adspot = ad_prefix + 'p71_text';
+ if(adid !="") adspot+= ";comp=" +adid +"";
+    if (immersion_adcode == "") {
+    document.write('<script src="http://ad.doubleclick.net/adj/ostg.sourceforge/'+adspot+';pg='+ad_page+';psrch=' + ad_search +';logged_in=0;tile='+dfp_tile+';'+ad_topics + 'ord='+dfp_ord+'?" type="text/javascript"><\/script>'); 
+    }
+</script></div>
+            </div>
+            <div class="yui-u">
+                <div class="ads">
+<script language="Javascript" type="text/javascript">
+    adspot = ad_prefix + 'p84_medrec';
+ if(adid !="") adspot+= ";comp=" +adid +"";
+    if (immersion_adcode == "") {
+    document.write('<script src="http://ad.doubleclick.net/adj/ostg.sourceforge/'+adspot+';pg='+ad_page+';psrch=' + ad_search +';logged_in=0;tile='+dfp_tile+';'+ad_topics + 'ord='+dfp_ord+'?" type="text/javascript"><\/script>'); 
+    }
+</script></div><br />
+                <div class="ads">
+<script language="Javascript" type="text/javascript">
+    adspot = ad_prefix + 'p86_featureddl';
+ if(adid !="") adspot+= ";comp=" +adid +"";
+    if (immersion_adcode == "") {
+    document.write('<script src="http://ad.doubleclick.net/adj/ostg.sourceforge/'+adspot+';pg='+ad_page+';psrch=' + ad_search +';logged_in=0;tile='+dfp_tile+';'+ad_topics + 'ord='+dfp_ord+'?" type="text/javascript"><\/script>'); 
+    }
+</script> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toggle-immersion">
+    <p class="thanks">From our advertisers</p>
+    <div id="fad77p" class="ads immersion">
+        <script type="text/javascript">
+            document.write(immersion_adcode);
+        </script>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+if (immersion_adcode) { $('.toggle-immersion').show(); $('.toggle-nonimmersion').hide();}
+</script>
+
+
+
+
+
+
+Mirror provided by:<br />
+<a href="http://www.c3sl.ufpr.br/" title="Centro de Computacao Cientifica e Software Livre"><img src="http://images.sourceforge.net/mirrorimages/ufpr-small.jpg" alt="Centro de Computacao Cientifica e Software Livre"/></a>
+<br />
+
+
+
+
+<script>
+    jQuery(window).load(function() {
+        if ('http://downloads.sourceforge.net/sourceforge/getid3/getid3-1.7.7.zip?use_mirror=ufpr') {
+            window.location.href = 'http://downloads.sourceforge.net/sourceforge/getid3/getid3-1.7.7.zip?use_mirror=ufpr';
+        }
+    });
+</script>
+
+
+
+
+        </div>
+    </div>
+      
+
+      <div id="ft">
+        <div class="yui-b">
+          <p class="sinfo">
+            
+          </p>
+          <div class="cols clearfix">
+            <div class="col">
+	      <h4>About SourceForge</h4>
+              <ul>
+                <li><a href="http://p.sf.net/sourceforge/about">About SourceForge</a></li>
+                <li><a href="/support/getsupport.php">Contact Us</a></li>
+                <li><a href="http://web.sourceforge.com/careers/">Jobs @ SF</a></li>
+                <li><a href="http://web.sourceforge.com/advertising/">Advertising</a></li>
+              </ul>
+            </div>
+            <div class="col">
+	      <h4>Find Software</h4>
+              <ul>
+		<li><a href="/search/">Search Software</a></li>
+                <li><a href="/softwaremap/">Browse by Category</a></li>
+                <li><a href="/top/topalltime.php?type=downloads">Most Popular Overall</a></li>
+                <li><a href="/top/mostactive.php">Most Active Overall</a></li>
+              </ul>
+            </div>
+            <div class="col">
+	      <h4>Develop Software</h4>
+              <ul>
+                <li><a href="/register-project/">Start a Project</a></li>
+                <li><a href="http://sourceforge.net/people/">Project Help Wanted</a></li>
+                <li><a href="http://sourceforge.net/new/">New Projects</a></li>
+              </ul>
+            </div>
+            <div class="col">
+	      <h4>Community</h4>
+              <ul>
+                <li><a href="/community/forum/">SourceForge Forums</a></li>
+                <li><a href="/community/blog/">The Blog</a></li>
+                <li><a href="http://twitter.com/sourceforge" rel="nofollow">@sourceforge on Twitter</a></li>
+                <li><a href="/community/?function=calendar">Calendar</a></li>
+              </ul>
+              
+            </div>
+            <div class="col">
+	      <h4>Help</h4>
+              <ul>
+                <li><a href="/apps/trac/sourceforge/wiki/WikiStart">Site Documentation</a></li>
+                <li><a href="/apps/trac/sourceforge/wiki/Support">Submit Support Requests</a></li>
+                <li><a href="/apps/wordpress/sourceforge/">Site Outages</a></li>
+		<li><a href="/feedback/">Feedback</a></li>
+              </ul>
+            </div>
+          </div>
+          <p class="copyright">Copyright &copy; 2009 <a title="Network which provides and promotes Open Source software downloads, development, discussion and news." href="http://sourceforge.com">SourceForge, Inc.</a> All rights reserved. <a href="http://p.sf.net/sourceforge/terms">Terms of Use</a></p>
+        </div>
+      </div>
+    </div>
+    
+    <!--[if IE]></div><![endif]-->
+    <!--[if IE 6]></div><![endif]-->
+    <!--[if IE 7]></div><![endif]-->
+    
+    <!-- BEGIN: Google Analytics -->
+    <script type="text/javascript">
+        pageTracker._trackPageview();
+    </script>
+    <!-- END: Google Analytics -->
+
+    
+
+<script>
+    
+    jQuery(document).ready(function(){
+        mirrorChoices('/settings/mirror_choices?projectname=getid3&filename=getid3-1.7.7.zip');
+    });
+    
+    
+     
+    cmCreatePageviewTag('getid3_project', null, null, null, '55859'); 
+     
+    
+</script>
+
+
+  <div id="cca_overlay"></div><div id="cca_view" class="sfBox feed sfBox-blue">
+        <div class="header"><h2></h2><div class="actions"><a class="icon close inline" href="#">Close</a></div></div>
+        <div id="cca_content"></div>
+  </div>
+
+
+  </body>
+</html>

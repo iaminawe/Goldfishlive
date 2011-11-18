@@ -1,0 +1,88 @@
+<?php
+// $Id: views_showcase.module,v 1.3 2010/04/29 15:20:40 khaledzaidan Exp $
+/**
+ * @file
+ *  The implementation of Views Showcase module.
+ */
+
+/**
+ * Implementation of hook_views_api().
+ */
+function views_showcase_views_api() {
+  return array('api' => 2);
+}
+
+/**
+ * Implementation of template preprocess for the view
+ */
+function template_preprocess_views_showcase_view(&$vars) {
+
+  $view   = $vars['view'];
+  $option = $view->style_plugin->options;
+  $row    = $view->row_plugin->options;
+  $vars['skin'] = $option['skin'] .".css";
+
+  drupal_add_js(
+    array(
+      'views_showcase' => array(
+          'easing'    => $option['easing'],
+          'cycle'     => $option['cycle'],
+          'sync'      => $option['sync'],
+          'timeout'   => $option['timeout'],
+          'listPause' => $option['listpause'],
+          'pause'     => $option['pause'],
+      ),
+    ),
+    'setting'
+  );
+
+  $vars['views_showcase_id'] = 'views-showcase-'. $view->name .'-'. $view->current_display;
+}
+
+/**
+ * Implementation of template preprocess for the view fields
+ */
+function template_preprocess_views_showcase_view_showcasefields(&$vars) {
+  $view = $vars['view'];
+  $options = $vars['options'];
+  // Loop through the fields for this view.
+  $inline = FALSE;
+  $vars['fields'] = array(); // ensure it's at least an empty array.
+  foreach ($view->field as $id => $field) {
+    // render this even if set to exclude so it can be used elsewhere.
+    $field_output = $view->field[$id]->theme($vars['row']);
+    if (empty($field->options['exclude'])) {
+      $object = new stdClass();
+      $object->content = $field_output;
+      if (isset($view->field[$id]->field_alias) && isset($vars['row']->{$view->field[$id]->field_alias})) {
+        $object->raw = $vars['row']->{$view->field[$id]->field_alias};
+      }
+      else {
+        $object->raw = NULL; // make sure it exists to reduce NOTICE
+      }
+      $object->handler = &$view->field[$id];
+      $object->element_type = $object->handler->element_type();
+
+      $object->class = views_css_safe($id);
+
+      $object->label = check_plain($view->field[$id]->label());
+      $vars['fields'][$id] = $object;
+      
+      //removing all of the other fields and setting de custom class
+      switch ($id) {
+        case $options['thumbnail_field']:
+          $object->custom_class = " views-showcase-thumbnail";
+          break;
+        case $options['teaser_field']:
+          $object->custom_class = " views-showcase-teaser";
+          break;
+        case $options['title_field']:
+          $object->custom_class = " views-showcase-title";
+          break;
+        default:
+          unset($vars['fields'][$id]);
+          break;
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+<?php
+// $id:
+
+/**
+ * @file
+ * This module provides profile information about the users Soundcloud profile.
+ */
+
+function soundcloud_commerce_menu() {
+  $items = array();
+
+  $items['soundcloud_commerce'] = array(
+    'title' => 'commerce',
+    'description' => 'Listing of SoundCloud tracks',
+    'page callback' => 'soundcloud_commerce_get',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+function soundcloud_commerce_get() {
+  global $base_url;
+  
+  $soundcloud = soundcloud_create_soundcloud(1);
+  // Get basic info about the authicated visitor.
+  $me = $soundcloud->request('me/tracks');
+  $me = new SimpleXMLElement($me);
+  $me = get_object_vars($me);
+         
+  // RSS namespace used
+  $namespaces = array('xmlns:dc="http://purl.org/dc/elements/1.1/"');
+
+  $items = '';
+  foreach ($me['track'] as $track) {
+    $extra = array();
+    $timestamp = strtotime($track->{'created-at'});
+
+    // Put in normal extra information
+    $extra = array_merge($extra,
+      array(
+        array('key' => 'pubDate', 'value' => date('r', $timestamp)),
+        array('key' => 'dc:creator', 'value' => $track->{'user-id'}), 
+        array('key' => 'guid', 'value' => $track->id .' at '. $base_url, 'attributes' => array('isPermaLink' => 'false'))
+      )
+    );
+    foreach ($extra as $element) {
+      if ($element['namespace']) {
+        $namespaces = array_merge($namespaces, $element['namespace']);
+      }
+    }
+    
+    $title = $track->title;
+    $link = $track->{'permalink-url'};
+    $item_text = 'text';
+    $items .= format_rss_item($title, $link, $item_text, $extra);
+  }
+    
+  // RSS channel information
+  $channel = array(
+    'title'       => variable_get('site_name', 'drupal'),
+    'version'     => '2.0',
+    'link'        => $base_url,
+    'description' => t('Internal rss feed', array('%site' => variable_get('site_name', 'drupal'))),
+    'language'    => $GLOBALS['locale'],
+  );
+  
+  // Construct actual RSS feed text
+  $output = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+  $output .= "<rss version=\"". $channel["version"] . "\" xml:base=\"". $base_url ."\" ". implode(' ', $namespaces) .">\n";
+  $output .= format_rss_channel($channel['title'], $channel['link'], $channel['description'], $items, $channel['language']);
+  $output .= "</rss>\n";
+
+  // Set MIME type in HTML header
+  drupal_set_header('Content-Type: application/rss+xml; charset=utf-8'); 
+  // Print feed text
+  print $output;
+  return NULL;
+}

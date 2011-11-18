@@ -1,0 +1,7 @@
+; $Id$
+name = Calendar tooltips
+description = Generates tooltip popups with node titles of events on mini calendars
+core = 6.x
+dependencies[] = beautytips
+dependencies[] = calendar
+version = 6.x-1.4

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<playlist>
+   <sound src="http://dev.goldfishlive.com/sites/default/files/audio/01 Sold My Soul.mp3" stream="true" soundbuffer="2">Sold my Soul</sound>
+   <sound src="http://dev.goldfishlive.com/sites/default/files/audio/05 Wet Welly.mp3" stream="true" soundbuffer="2">Wet Welly</sound>
+   <sound src="http://dev.goldfishlive.com/sites/default/files/audio/10 Coming Home.mp3" stream="true" soundbuffer="2">Coming Home</sound>
+   <sound src="http://dev.goldfishlive.com/sites/default/files/audio/11 Obey.mp3" stream="true" soundbuffer="2">Obey</sound>
+
+</playlist>

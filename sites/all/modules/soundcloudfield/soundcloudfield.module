@@ -1,0 +1,413 @@
+<?php
+// $Id: soundcloudfield.module,v 1.1 2010/06/29 11:54:29 attilafekete Exp $
+
+/* 
+ * track: "http://soundcloud.com/blumarten/blu-mar-ten-she-moves-through-asc-remix" 
+ * set:   "http://soundcloud.com/quantum-world/sets/ambient"
+ */
+
+
+define('SOUNDCLOUDFIELD_DEFAULT_WIDTH', 100);
+define('SOUNDCLOUDFIELD_DEFAULT_HEIGHT', 81);
+define('SOUNDCLOUDFIELD_DEFAULT_SET_WIDTH', 100);
+define('SOUNDCLOUDFIELD_DEFAULT_SET_HEIGHT', 305);
+//==========================================//
+// DEFINING A FIELD
+//==========================================//
+
+/**
+ * Implementation of hook_field_info().
+ * 
+ * Regisztraljuk a mezonket
+ */
+function soundcloudfield_field_info() {
+  return array(
+    'soundcloudfield' => array(
+      'label' => t('Soundcloud track or set'), //  cimke , Manage fields oldalon fog megjelenni
+      'description' => t('Store Soundcloud track id and display it.'), // leiras: milyen tipusu adatot tarol a mezo
+      'callbacks' => array(
+        'tables' => CONTENT_CALLBACK_DEFAULT,
+        'arguments' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_field_settings().
+ * 
+ * CCK kezeli a modul adatbazissal kapcsolatos teendoit. Kulon oszlopot ker a mezotipusok tarolasara
+ */
+function soundcloudfield_field_settings($op, $field) {
+  switch ($op) {
+    case 'database columns':
+        $columns = array(
+          // ez a mezo tartalmazza a begepelt URL-t
+          'embed' => array('type' => 'varchar', 'length' => 255, 'not null' => FALSE, 'sortable' => TRUE),
+        );
+      return $columns;
+  }
+}
+
+/**
+ * Implementation of hook_field().
+ * 
+ * ha van erteke az 'embed' mezonek, akkor leellenorizzuk regualaris kifejezessel hogy 'soundcloud.com' tipusu URL az erteke?
+ */
+function soundcloudfield_field($op, &$node, $field, &$items, $teaser, $page) {
+  switch ($op) {
+    case 'validate':
+      if (is_array($items)) {
+        foreach ($items as $delta => $item) {
+          $error_element = isset($item['_error_element']) ? $item['_error_element'] : '';
+            // $field tomb itt elerheto
+          if (!empty($item['embed']) && !preg_match('@^http://soundcloud\.com/([^"\&]+)@i', $item['embed'], $matches)) {
+            form_set_error($field['field_name'],t('"%url" is not a valid soundcloud url',array('%url' =>  $item['embed'])));
+          }
+        }
+      }
+      break;
+  }
+}
+
+/**
+ *  implementation of <modulename>_content_is_empty()
+ */
+function soundcloudfield_content_is_empty($item, $field) {
+  return empty($item['embed']);             
+}
+
+//==========================================//
+// DEFINING A WIDGET
+//==========================================//
+
+/**
+ * Implementation of hook_widget_info().
+ * 
+ * feluleti elemtipus definialasa
+ */
+function soundcloudfield_widget_info() {
+  return array(
+    'soundcloudfield_textfield' => array(
+      'label' => t('Soundcloud track'),
+      'field types' => array('soundcloudfield'),  // hasznalhato mezotipusok listaja
+      'multiple values' => CONTENT_HANDLE_CORE, // mas esetben 'CONTENT_HANDLE_MODULE'
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_NONE, // mas esetben 'CONTENT_CALLBACK_CUSTOM' ,'CONTENT_CALLBACK_NONE' = no default value.
+      ),
+      ),
+      'soundcloudfield_set' => array(
+      'label' => t('Soundcloud set'),
+      'field types' => array('soundcloudfield'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_NONE,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_widget_settings().
+ */
+function soundcloudfield_widget_settings($op, $widget) {
+  switch ($op) {
+    case 'form':
+      $form = array();
+      if ($widget['type'] == 'soundcloudfield_textfield') {
+        $width = variable_get('soundcloudfield_default_width', SOUNDCLOUDFIELD_DEFAULT_WIDTH);
+        $height = variable_get('soundcloudfield_default_height', SOUNDCLOUDFIELD_DEFAULT_HEIGHT);
+        $form['audio'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Soundcloud track settings'),
+          '#description' => t('Soundcloud track settings'),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['audio']['audio_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Player display width'),
+          '#default_value' => empty($widget['audio_width']) ? $width : $widget['audio_width'],
+          '#required' => TRUE,
+          '#description' => t('Player width. Default is @width.', array('@width' => $width)),
+        );
+        $form['audio']['audio_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Player display height'),
+          '#default_value' => empty($widget['audio_height']) ? $height : $widget['audio_height'],
+          '#required' => TRUE,
+          '#description' => t('Player height. Default is @height.', array('@height' => $height)),
+        );
+        $form['audio']['audio_autoplay'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Autoplay'),
+          '#default_value' => empty($widget['audio_autoplay']) ? '' : $widget['audio_autoplay'],
+          '#description' => t('Player autoplay'),
+        );
+        $form['audio']['audio_showcomments'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Show comments'),
+          '#default_value' => empty($widget['audio_showcomments']) ? '' : $widget['audio_showcomments'],
+          '#description' => t('Showing comment in player'),
+        );
+        $form['audio']['audio_color'] = array(
+          '#type' => (module_exists('colorpicker') ? 'colorpicker_' : '') . 'textfield',
+          '#title' => t('Player color'),
+          '#default_value' => empty($widget['audio_color']) ? '#000000' : $widget['audio_color'],
+          '#required' => TRUE,
+          '#description' => t('Player color.'),
+        );
+      } 
+      else if  ($widget['type'] == 'soundcloudfield_set') {
+        $width = variable_get('soundcloudfield_default_set_width', SOUNDCLOUDFIELD_DEFAULT_SET_WIDTH);
+        $height = variable_get('soundcloudfield_default_set_height', SOUNDCLOUDFIELD_DEFAULT_SET_HEIGHT);
+        $form['audio'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Soundcloud set settings'),
+          '#description' => t('Soundcloud set settings'),
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+        );
+        $form['audio']['audio_width'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Player display width'),
+          '#default_value' => empty($widget['audio_width']) ? $width : $widget['audio_width'],
+          '#required' => TRUE,
+          '#description' => t('Player width. Default is @width.', array('@width' => $width)),
+        );
+        $form['audio']['audio_height'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Player display height'),
+          '#default_value' => empty($widget['audio_height']) ? $height : $widget['audio_height'],
+          '#required' => TRUE,
+          '#description' => t('Player height. Default is @height.', array('@height' => $height)),
+        );
+        $form['audio']['audio_autoplay'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Autoplay'),
+          '#default_value' => empty($widget['audio_autoplay']) ? '' : $widget['audio_autoplay'],
+          '#description' => t('Player autoplay'),
+        );
+        $form['audio']['audio_showcomments'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Show comments'),
+          '#default_value' => empty($widget['audio_showcomments']) ? '' : $widget['audio_showcomments'],
+          '#description' => t('Showing comment in player'),
+        );
+        $form['audio']['audio_showplaycount'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Show play count'),
+          '#default_value' => empty($widget['audio_showplaycount']) ? '' : $widget['audio_showplaycount'],
+          '#description' => t('Show play count in player'),
+        );
+         $form['audio']['audio_showartwork'] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Show artwork'),
+          '#default_value' => empty($widget['audio_showartwork']) ? '' : $widget['audio_showartwork'],
+          '#description' => t('Show artwork in player'),
+        );       
+        $form['audio']['audio_color'] = array(
+          '#type' => (module_exists('colorpicker') ? 'colorpicker_' : '') . 'textfield',
+          '#title' => t('Player color'),
+          '#default_value' => empty($widget['audio_color']) ? '#000000' : $widget['audio_color'],
+          '#required' => TRUE,
+          '#description' => t('Player color.'),
+        );
+      }
+
+      return $form;
+
+    case 'validate':
+      if (!is_numeric($widget['audio_width']) || intval($widget['audio_width']) != $widget['audio_width'] || $widget['audio_width'] < 1) {
+        form_set_error('audio_width', t('"Player width" must be a positive integer.'));
+      }
+      if (!is_numeric($widget['audio_height']) || intval($widget['audio_height']) != $widget['audio_height'] || $widget['audio_height'] < 1) {
+        form_set_error('audio_height', t('"Player height" must be a positive integer.'));
+      }
+    // a parameterek a $field['widget'] tombben lesznek
+     
+    // track vagy set parametereket kell visszaadnunk?
+    case 'save':
+      if ($widget['widget_type'] == 'soundcloudfield_textfield') {
+        return array('audio_width', 'audio_height', 'audio_autoplay', 'audio_showcomments', 'audio_color', 's_track'=>TRUE);
+      } else if ($widget['widget_type'] == 'soundcloudfield_set') {
+        return array('audio_width', 'audio_height', 'audio_autoplay', 'audio_showcomments', 'audio_showplaycount', 'audio_showartwork', 'audio_color', 's_set'=>TRUE);
+      }
+  }
+}
+
+/**
+ * Implementation of hook_elements().
+ * 
+ * Drupal Form API-nak elmagyarazzuk mikent banjon a mezonkkel
+ */
+function soundcloudfield_elements() {  // a Drupal feltetelezi, hogy leteznek a deklaralt elemekhez azok sminkfuggvenyei
+  return array(
+    'soundcloudfield_textfield' => array( // a form api az uj widgetre kivancsi ezert a widget neve kell ide
+      '#input' => TRUE,
+      '#columns' => array('embed'),
+      '#delta' => 0,
+      '#process' => array('soundcloudfield_process'), // az a hely ahol megtalalja az uj urlapelem a feldolgozasakor hasznalando kodot
+    ),
+    
+    'soundcloudfield_set' => array(
+      '#input' => TRUE,
+      '#columns' => array('embed'), 
+      '#delta' => 0,
+      '#process' => array('soundcloudfield_process'),
+    ),
+     
+  );
+}
+
+/**
+ * Implementation of hook_widget().
+ * 
+ * amikor a CCK hozzaadja a mezonket az urlaphoz, tudatjuk vele, hogy allitsa be a megfelelo widget tipust es az alapertelmezett erteket, ha az letezik
+ */
+function soundcloudfield_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  $element = array(
+    '#type' => $field['widget']['type'],
+    '#default_value' => isset($items[$delta]) ? $items[$delta] : NULL, 
+  );
+  return $element;
+}
+
+/*
+* #process callback
+* urlapelem feldolgozasa
+*/
+
+function soundcloudfield_process($element, $edit, $form_state, $form) {
+  $field = $form['#field_info'][$element['#field_name']];
+  $field_key = $element['#columns'][0];    // $field_key = 'embed'
+  $delta = $element['#delta'];
+ 
+  // szoveges beviteli mezo 
+  $element[$field_key] = array(
+    '#type' => 'textfield',
+    '#title' => $element['#title'],
+    '#description' => 'Here you can type the URL of the Soundcloud track or set, depending on what field type do you use',
+    '#required' => $element['#required'],
+    '#maxlength' => 255,
+    '#default_value' => isset($element['#value'][$field_key]) ? $element['#value'][$field_key] : NULL,
+  );
+  return $element;
+}
+
+/**
+ * Implementation of hook_theme().
+ * 
+ * sminkeles, megjeleniteshez
+ */
+function soundcloudfield_theme() {
+  return array(
+    'soundcloudfield_textfield' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'soundcloudfield_set' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'soundcloudfield_formatter_default' => array(
+      'arguments' => array('element' => NULL),
+    ),
+  );
+}
+
+// visszaadjuk a Drupal Form API-ja altal generalt HTML erteket
+function theme_soundcloudfield_textfield($element) {
+  return $element['#children'];
+}
+
+function theme_soundcloudfield_set($element) {
+  return $element['#children'];
+}
+//==========================================//
+// DEFINING A FORMATTER
+//==========================================//
+
+/**
+ * Implementation of hook_field_formatter_info().
+ */
+/* hook_field_formatter_info segitsegevel definialja sajat mezo formazoit,
+ * majd a hook_theme-ben deklaralja az azokat eloallito callback fuggvenyeket,
+ * vegul megvalositja az igy deklaralt theme_EGYEDI_FORMAZO fuggvenyeit,
+ */
+function soundcloudfield_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label' => t('Default'),
+      'field types' => array('soundcloudfield'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+    ),
+  );
+}
+
+/**
+ * Implementation of theme_formatter_default
+ */
+function theme_soundcloudfield_formatter_default($element) {   // hook_theme-ben deklaralva
+
+  if (!empty($element['#item']['embed'])) {
+    $field_info = soundcloudfield_get_content_node_field_instance_by_field_name($element['#field_name']);  // adatbazisbol kinyerjuk a widget beallitasait, ehhez egy fgv-t hasznalunk
+ 
+    // track eseten legeneraljuk a flash lejatszot
+    if ($field_info['widget_type'] == 'soundcloudfield_textfield') {
+      $field_info['widget_settings'] = unserialize($field_info['widget_settings']);
+      $field_info['widget_settings']['audio_showcomments'] = $field_info['widget_settings']['audio_showcomments'] ? 'true' : 'false';
+      $field_info['widget_settings']['audio_autoplay'] = $field_info['widget_settings']['audio_autoplay'] ? 'true' : 'false';
+   
+      $width = $field_info['widget_settings']['audio_width'];
+      $height = $field_info['widget_settings']['audio_height'];;
+  
+      $encoded_url = urlencode($element['#item']['embed']);
+      $parsed_url = parse_url($element['#item']['embed']);
+      $params = 'url=' . $encoded_url . '&amp;show_comments='.$field_info['widget_settings']['audio_showcomments'].'&amp;auto_play='.$field_info['widget_settings']['audio_autoplay'].'&amp;color='.str_replace('#', '', $field_info['widget_settings']['audio_color']);
+  
+      $output = '';
+      $output .= '<object height="' . $height . '" width="' . $width . '%"><param name="movie" value="http://player.' . $parsed_url['host'] . '/player.swf?' . $params . '"></param>';
+      $output .= '<param name="allowscriptaccess" value="always"></param><embed allowscriptaccess="always" height="' . $height . '" src="http://player.' . $parsed_url['host'] . '/player.swf?' . $params . '" type="application/x-shockwave-flash" width="' . $width . '%"></embed></object>';  
+    } 
+    // set eseten legeneraljuk a flash lejatszot
+    else if ($field_info['widget_type'] == 'soundcloudfield_set') {
+      $field_info['widget_settings'] = unserialize($field_info['widget_settings']);
+      $field_info['widget_settings']['audio_showcomments'] = $field_info['widget_settings']['audio_showcomments'] ? 'true' : 'false';
+      $field_info['widget_settings']['audio_autoplay'] = $field_info['widget_settings']['audio_autoplay'] ? 'true' : 'false';
+      $field_info['widget_settings']['audio_showplaycount'] = $field_info['widget_settings']['audio_showplaycount'] ? 'true' : 'false';
+      $field_info['widget_settings']['audio_showartwork'] = $field_info['widget_settings']['audio_showartwork'] ? 'true' : 'false';
+      
+      $width = $field_info['widget_settings']['audio_width'];
+      $height = $field_info['widget_settings']['audio_height'];;
+  
+      $encoded_url = urlencode($element['#item']['embed']);
+      $parsed_url = parse_url($element['#item']['embed']);
+      $params = 'url=' .$encoded_url. '&amp;show_comments='.$field_info['widget_settings']['audio_showcomments'].
+      							      '&amp;auto_play='.$field_info['widget_settings']['audio_autoplay'].
+                                      '&amp;show_playcount='.$field_info['widget_settings']['audio_showplaycount'].
+      								  '&amp;show_artwork='.$field_info['widget_settings']['audio_showartwork'].
+      							      '&amp;color='.str_replace('#', '', $field_info['widget_settings']['audio_color']);
+      $output = '';
+      $output .= '<object height="' . $height . '" width="' . $width . '%"><param name="movie" value="http://player.' . $parsed_url['host'] . '/player.swf?' . $params . '"></param>';
+      $output .= '<param name="allowscriptaccess" value="always"></param><embed allowscriptaccess="always" height="' . $height . '" src="http://player.' . $parsed_url['host'] . '/player.swf?' . $params . '" type="application/x-shockwave-flash" width="' . $width . '%"></embed></object>';
+    }
+       
+    return $output;
+  }
+  else {
+    return NULL;
+  }
+}
+
+/**
+ * Get the field instance by field name.
+ *
+ * Get field data from database.
+ *
+ * @param string $field_name
+ * @return array with a row of content_node_field_instance table
+ * 
+ * adatbazisbol kiolvassuk az adott mezonek a parametereit
+ */
+function soundcloudfield_get_content_node_field_instance_by_field_name($field_name) {
+  return db_fetch_array(db_query("SELECT * FROM {content_node_field_instance} WHERE field_name = '%s'", $field_name));
+}

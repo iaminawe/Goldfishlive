@@ -1,0 +1,13 @@
+; $Id: soundcloudfield.info,v 1.1 2010/06/29 11:54:29 attilafekete Exp $
+name = Soundcloud field
+description = Soundcloud CCK field
+dependencies[] = content
+package = Soundcloud
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-07-11
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "soundcloudfield"
+datestamp = "1278835746"
+

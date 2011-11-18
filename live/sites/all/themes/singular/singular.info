@@ -1,0 +1,26 @@
+v; $Id$
+name = "Singular"
+description = "Simple theme based on tao."
+version = "6.x-1.2"
+core = "6.x"
+engine = "phptemplate"
+base theme = "tao"
+
+project = "singular"
+project status url = "http://code.developmentseed.org/fserver" 
+
+stylesheets[screen][] = "style.css"
+stylesheets[screen][] = "css/forms.css"
+
+
+scripts[] = "js/theme.js"
+scripts[] = "js/popup.js"
+
+regions[navmenu] = "navmenu"
+regions[content] = "Content"
+regions[left] = "LeftSidebar"
+regions[right] = "Sidebar"
+regions[footer] = "Footer"
+
+
+features[] = ""

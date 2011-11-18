@@ -1,0 +1,263 @@
+<?php
+// $Id: sm2_audio.module,v 1.1.2.5 2010/01/09 18:18:58 davebv Exp $
+
+function sm2_audio_init() {
+  // Add module Styles
+  //drupal_add_css(drupal_get_path('module', 'soundmanager2') .'/players/page-player.css');
+  // Add modules scripts
+  //drupal_add_js(drupal_get_path('module', 'soundmanager2') .'/players/page-player.js');
+ // include_once(drupal_get_path('module', 'sm2_audio') .'/ui360.inc');
+}
+
+function sm2_audio_audio_player() {
+  $items['ui360'] = array(
+    'module'      => 'audio',
+    'title'       => t('ui360 by SoundManager2'),
+    'description' => t('Cute ui360 player...'),
+    'url'         => 'http://www.schillmania.com/projects/soundmanager2/',
+    'preview'     => drupal_get_path('module', 'soundmanager2') .'/players/ui360.png',
+    //'preview'     => 'ui360.png',
+    'formats'     => array('wav', 'mp3'),
+    'theme_node'  => 'sm2_audio_ui360_node_player',
+  );
+  $items['page-player'] = array(
+    'module'      => 'audio',
+    'title'       => t('Page player by SoundManager2'),
+    'description' => t('Page player style...'),
+    'url'         => 'http://www.schillmania.com/projects/soundmanager2/',
+    'preview'     => drupal_get_path('module', 'soundmanager2') .'/players/page-player.png',
+    //'preview'     => 'ui360.png',
+    'formats'     => array('wav', 'mp3'),
+    'theme_node'  => 'sm2_audio_page_player_node_player',
+  );
+ 
+  return $items;
+}
+
+function theme_sm2_audio_ui360_node_player($node, $options = array()) {
+  // make sure it's compatible with the flash player
+  //if (!audio_is_flash_playable($node)) {
+    //return NULL;
+  //}
+
+  if (!module_exists('soundmanager2')){
+    return NULL;
+  }
+  require_once(drupal_get_path('module','soundmanager2') .'/players/ui360.inc');
+
+  $options['song_url'] = check_url($node->url_play);
+  $options['song_title'] = check_plain($node->audio_tags['title']);
+
+  $enlace = $options['song_url'] . '/' . $node->audio['file']->filename;
+  $titulo = $options['song_title'];
+
+$output = <<<EOT
+<div class="ui360">
+  <a href="$enlace">$titulo</a>
+</div>
+EOT;
+
+  return $output;
+}
+
+function theme_sm2_audio_page_player_node_player($node, $options = array()) {
+
+  if (!module_exists('soundmanager2')){
+    return NULL;
+  }
+  require_once(drupal_get_path('module','soundmanager2') .'/players/page-player.inc');
+
+  $options['song_url'] = check_url($node->url_play);
+  $options['song_title'] = check_plain($node->audio_tags['title']);
+
+  $enlace = $options['song_url'] . '/' . $node->audio['file']->filename;
+  $titulo = $options['song_title'];
+
+$output = <<<EOT
+  <!-- div -->
+    <ul class="playlist">
+        <li>
+          <a href="$enlace">$titulo</a>
+        </li>
+    </ul>
+  <!-- /div -->
+    <div id="control-template">
+      <!-- control markup inserted dynamically after each link -->
+      <div class="controls">
+        <div class="statusbar">
+          <div class="loading"></div>
+          <div class="position"></div>
+        </div>
+      </div>
+      <div class="timing">
+        <div id="sm2_timing" class="timing-data">
+          <span class="sm2_position">%s1</span> / <span class="sm2_total">%s2</span></div>
+        </div>
+        <div class="peak">
+          <div class="peak-box">
+            <span class="l"></span>
+            <span class="r"></span>
+          </div>
+        </div>
+      </div>
+    
+      <div id="spectrum-container" class="spectrum-container">
+        <div class="spectrum-box">
+          <div class="spectrum"></div>
+        </div>
+      </div> 
+    
+  </div>
+EOT;
+
+  return $output;
+}
+
+
+function sm2_audio_perm() {
+  return array('administer sm2_audio');
+}
+
+// Admin page
+function sm2_audio_admin() {
+  $form = array();
+
+  $form['sm2_audio_waveform'] = array( // useWaveformData: true
+    '#type' => 'checkbox',
+    '#title' => t('Waveform'),
+    '#default_value' => variable_get('sm2_audio_waveform', true),
+    '#description' => t("Turn on waveform."),
+  );
+  $form['sm2_audio_eq'] = array( // useEQData: true
+    '#type' => 'checkbox',
+    '#title' => t('EQ'),
+    '#default_value' => variable_get('sm2_audio_eq', true),
+    '#description' => t("Turn on eq."),
+  );
+  $form['sm2_audio_amplifier'] = array( // useAplifier: true
+    '#type' => 'checkbox',
+    '#title' => t('Amplifier'),
+    '#default_value' => variable_get('sm2_audio_amplifier', true),
+    '#description' => t("Turn on Amplifier."),
+  );
+  //$form['sm2_audio_circle_diameter'] = array( //circleDiameter: 256 (1-256
+  //  '#type' => 'textfield', 
+  //  '#title' => t('Circle Diameter'), 
+  //  '#default_value' => variable_get('sm2_audio_circle_diameter', '256'),
+  //  '#description' => t('Size') .' 1-256',
+  //  '#size' => 4, 
+  //  '#maxlength' => 3, 
+  //  '#required' => TRUE,
+  //);
+  //$form['sm2_audio_waveform_thickness'] = array(
+  //  '#type' => 'textfield', 
+  //  '#title' => t('Waveform Thickness'), 
+  //  '#default_value' => variable_get('sm2_audio_waveform_thickness', '20'), 
+  //  '#description' => t('Thickness') .' 1-100',
+  //  '#size' => 4, 
+  //  '#maxlength' => 3, 
+  //  '#required' => TRUE,
+  //);
+  //$form['sm2_audio_wave_downsample'] = array(
+  //  '#type' => 'textfield', 
+  //  '#title' => t('Wave Downsample'), 
+  //  '#default_value' => variable_get('sm2_audio_wave_downsample', '4'), 
+  //  '#description' => t('Scale') .' 1-16',
+  //  '#size' => 3, 
+  //  '#maxlength' => 2, 
+  //  '#required' => TRUE,
+  //);
+  //$form['sm2_audio_eq_thickness'] = array(
+  //  '#type' => 'textfield', 
+  //  '#title' => t('EQ thickness'), 
+  //  '#default_value' => variable_get('sm2_audio_eq_thickness', '20'), 
+  //  '#description' => t('Thickness') .' 1-50',
+  //  '#size' => 3, 
+  //  '#maxlength' => 2, 
+  //  '#required' => TRUE,
+  //);
+  //$form['sm2_audio_eq_downsample'] = array(
+  //  '#type' => 'textfield', 
+  //  '#title' => t('EQ downsample'), 
+  //  '#default_value' => variable_get('sm2_audio_eq_downsample', '5'), 
+  //  '#description' => t('Scale') .' 1-16',
+  //  '#size' => 3, 
+  //  '#maxlength' => 2, 
+  //  '#required' => TRUE,
+  //);
+
+  //$form['sm2_audio_wf_position'] = array(
+  //  '#type' => 'radios', 
+  //  '#title' => t('Waveform Position'), 
+  //  '#default_value' => variable_get('sm2_audio_wf_position', 0), 
+  //  '#options' => array(t('Inside'), t('Outside')),
+  //);
+
+  //$form['sm2_audio_eq_position'] = array(
+  //  '#type' => 'radios', 
+  //  '#title' => t('EQ Position'), 
+  //  '#default_value' => variable_get('sm2_audio_eq_position', 1), 
+  //  '#options' => array(t('Inside'), t('Outside')),
+  //);
+  //$form['sm2_audio_waveform_color'] = array(
+  //  '#type' => 'textfield', 
+  //  '#title' => t('Waveform Color'), 
+  //  '#default_value' => variable_get('sm2_audio_waveform_color', '#0099ff'), 
+  //  '#description' => t('Color in hex or transparent'),
+  //  '#size' => 15, 
+  //  '#maxlength' => 14, 
+  //  '#required' => TRUE,
+  //);
+  //$form['sm2_audio_eq_color'] = array(
+  //  '#type' => 'textfield', 
+  //  '#title' => t('EQ Color'), 
+  //  '#default_value' => variable_get('sm2_audio_eq_color', '#339933'), 
+  //  '#description' => t('Color in hex or transparent'),
+  //  '#size' => 15, 
+  //  '#maxlength' => 14, 
+  //  '#required' => TRUE,
+  //);
+  //$form['sm2_audio_loaded_color'] = array(  
+  //  '#type' => 'textfield', 
+  //  '#title' => t('Loaded Color'), 
+  //  '#default_value' => variable_get('sm2_audio_loaded_color', '#ccc'), 
+  //  '#description' => t('Color in hex or transparent'),
+  //  '#size' => 15, 
+  //  '#maxlength' => 14, 
+  //  '#required' => TRUE,
+  //);
+  //$form['sm2_audio_progress_color'] = array(  
+  //  '#type' => 'textfield', 
+  //  '#title' => t('Progress Color'), 
+  //  '#default_value' => variable_get('sm2_audio_progress_color', '#ff33ff'), 
+  //  '#description' => t('Color in hex or transparent'),
+  //  '#size' => 15, 
+  //  '#maxlength' => 14, 
+  //  '#required' => TRUE,
+  //);
+  //$form['sm2_audio_background_color'] = array(
+  //  '#type' => 'textfield', 
+  //  '#title' => t('Background Color'), 
+  //  '#default_value' => variable_get('sm2_audio_background_color', '#eee'), 
+  //  '#description' => t('Color in hex or transparent'),
+  //  '#size' => 15, 
+  //  '#maxlength' => 14, 
+  //  '#required' => TRUE,
+  //);
+
+  return system_settings_form($form);
+}
+
+
+//function sm2_audio_admin_validate($form, &$form_state) {
+  // $sm_path = trim($form_state['values']['sm2-path'], '/');
+  // $form_state['values']['sm2-path'] = $sm_path ;
+  // $sm_path_swf = $sm_path .'/swf';
+  // $sm_path_script = $sm_path .'/script';
+
+  // file_check_directory($sm_path, 0, 'sm2-path');
+  // file_check_directory($sm_path_swf, 0, 'sm2-path');
+  // file_check_directory($sm_path_script, 0, 'sm2-path');
+//}
+
+

@@ -1,0 +1,9 @@
+; $Id: sm2_plst_cck.info,v 1.1.2.3 2009/11/04 17:53:31 davebv Exp $
+name = Sound Manager 2 playlist CCK formatter
+description = Defines a formatter for render the file to <a href="http://www.schillmania.com/projects/sm2_plst_cck/">soundmanager2</a> <br/> Activate filefield or audio module.
+dependencies[] = content
+dependencies[] = soundmanager2
+;dependencies[] = filefield
+;dependencies[] = filefield_meta
+package = CCK
+core = 6.x

@@ -1,0 +1,49 @@
+<?php
+// $Id: soundcloud.install,v 1.2 2010/05/13 21:08:12 tdrycker Exp $
+
+/**
+ * @file
+ * Installation file for the Soundcloud module.
+ * A database is created in order to store the users access key and access secret.
+ */
+function soundcloud_install() {
+  drupal_install_schema('soundcloud');
+}
+function soundcloud_uninstall() {
+  drupal_uninstall_schema('soundcloud');
+}
+
+function soundcloud_schema() {
+  $schema = array();
+  $schema['soundcloud_tokens'] = array(
+     'description' => 'Stores request and access tokens for your users',
+     'fields' => array(
+        'uid' => array(
+          'description' => t('Drupal user id related to the token'),
+          'type'        => 'int',
+          'unsigned'    => TRUE,
+          'not null'    => TRUE,
+        ),
+        'token_key' => array(
+          'description' => t('Token key.'),
+          'type'        => 'varchar',
+          'length'      => 56,
+          'not null'    => TRUE,
+        ),
+        'secret' => array(
+          'description' => t('Token secret.'),
+          'type'        => 'varchar',
+          'length'      => 56,
+          'not null'    => TRUE,
+        ),
+        'permalink' => array(
+          'description' => t('Unique Soundcloud ID of the user'),
+          'type'        => 'varchar',
+          'length'      => 32,
+          'not null'    => TRUE,
+        ),
+      ),
+     'primary key' => array('uid', 'token_key'),
+  );
+  return $schema;
+}

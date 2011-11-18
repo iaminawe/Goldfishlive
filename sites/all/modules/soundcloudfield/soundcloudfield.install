@@ -1,0 +1,41 @@
+<?php 
+// $Id: soundcloudfield.install,v 1.1 2010/06/29 11:54:29 attilafekete Exp $
+// Notify CCK when this module is enabled, disabled, installed, 
+// and uninstalled so CCK can do any necessary preparation or cleanup.
+
+/**
+* @file
+* Implementation of hook_install().
+*/
+function soundcloudfield_install() {
+	drupal_load('module', 'content');
+	content_notify('install', 'soundcloudfield');
+}
+
+/**
+* Implementation of hook_uninstall().
+*/
+function soundcloudfield_uninstall() {
+  drupal_load('module', 'content');
+  content_notify('uninstall', 'soundcloudfield');
+}
+
+/**
+* Implementation of hook_enable().
+*
+* Notify content module when this module is enabled.
+*/
+function soundcloudfield_enable() {
+  drupal_load('module', 'content');
+  content_notify('enable', 'soundcloudfield');
+}
+
+/**
+* Implementation of hook_disable().
+*
+* Notify content module when this module is disabled.
+*/
+function soundcloudfield_disable() {
+  drupal_load('module', 'content');
+  content_notify('disable', 'soundcloudfield');
+}

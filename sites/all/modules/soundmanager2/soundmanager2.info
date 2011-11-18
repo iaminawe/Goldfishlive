@@ -1,0 +1,8 @@
+; $Id: soundmanager2.info,v 1.1.2.2.2.2 2009/11/04 16:10:47 davebv Exp $
+name = SoundManager 2
+description = Includes the <a href="http://www.schillmania.com/projects/soundmanager2/">soundmanager2</a> Player.
+;dependencies[] = content
+;dependencies[] = filefield
+;dependencies[] = filefield_meta
+package = SoundManager2
+core = 6.x

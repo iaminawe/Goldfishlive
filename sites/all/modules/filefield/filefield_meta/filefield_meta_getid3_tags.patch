@@ -1,0 +1,352 @@
+Index: includes/filefield_meta.views.inc
+===================================================================
+RCS file: /cvs/drupal-contrib/contributions/modules/filefield/filefield_meta/includes/filefield_meta.views.inc,v
+retrieving revision 1.2
+diff -u -r1.2 filefield_meta.views.inc
+--- includes/filefield_meta.views.inc	24 Apr 2010 06:28:03 -0000	1.2
++++ includes/filefield_meta.views.inc	25 Apr 2010 05:10:58 -0000
+@@ -162,6 +162,16 @@
+     ),
+   );
+ 
++  // Tags.
++  $data['filefield_meta']['tags'] = array(
++    'title' => t('ID3 tags'),
++    'help' => t('ID3 tags include embedded information such as artist, album, year, genre and other informaiton.'),
++    'field' => array(
++      'handler' => 'filefield_meta_handler_field_tags',
++      'click sortable' => FALSE,
++    ),
++  );
++
+   return $data;
+ }
+ 
+@@ -184,6 +194,9 @@
+       'filefield_meta_handler_field_samplerate' => array(
+         'parent' => 'views_handler_field_numeric',
+       ),
++      'filefield_meta_handler_field_tags' => array(
++        'parent' => 'views_handler_field_prerender_list',
++      ),
+     ),
+   );
+ }
+Index: filefield_meta.module
+===================================================================
+RCS file: /cvs/drupal-contrib/contributions/modules/filefield/filefield_meta/filefield_meta.module,v
+retrieving revision 1.16
+diff -u -r1.16 filefield_meta.module
+--- filefield_meta.module	24 Apr 2010 19:35:28 -0000	1.16
++++ filefield_meta.module	25 Apr 2010 05:10:58 -0000
+@@ -1,5 +1,5 @@
+ <?php
+-// $Id: filefield_meta.module,v 1.16 2010/04/24 19:35:28 quicksketch Exp $
++// $Id: filefield_meta.module,v 1.14 2009/04/20 22:29:24 quicksketch Exp $
+ 
+ /**
+  * @file
+@@ -7,6 +7,16 @@
+  */
+ 
+ /**
++ * Implementation of hook_init().
++ */
++function filefield_meta_init() {
++  // Conditional module support.
++  if (module_exists('token')) {
++    module_load_include('inc', 'filefield_meta', 'filefield_meta.token');
++  }
++}
++
++/**
+  * Implementation of hook_theme().
+  */
+ function filefield_meta_theme() {
+@@ -44,7 +54,24 @@
+ }
+ 
+ /**
+- * Implementation of filefield's hook_file_insert().
++ * Implementation of FileField's hook_file_load().
++ */
++function filefield_meta_file_load(&$file) {
++  $result = db_query("SELECT * FROM {filefield_meta} WHERE fid = %d", $file->fid);
++  $data = db_fetch_array($result);
++
++  // Essentially this is a lazy-loader. If no record exists, read in the file.
++  if ($data) {
++    $data['tags'] = isset($data['tags']) ? unserialize($data['tags']) : array();
++    $file->data = isset($file->data) ? array_merge($file->data, $data) : $data;
++  }
++  else {
++    filefield_meta_file_insert($file);
++  }
++}
++
++/**
++ * Implementation of FileField's hook_file_insert().
+  */
+ function filefield_meta_file_insert(&$file) {
+   if (!empty($file->fid)) {
+@@ -55,7 +82,7 @@
+ }
+ 
+ /**
+- * Implementation of filefield's hook_file_update().
++ * Implementation of FileField's hook_file_update().
+  */
+ function filefield_meta_file_update(&$file) {
+   if (!empty($file->fid)) {
+@@ -65,7 +92,7 @@
+ }
+ 
+ /**
+- * Implementation of filefield's hook_file_delete().
++ * Implementation of FileField's hook_file_delete().
+  */
+ function filefield_meta_file_delete($file) {
+   db_query('DELETE FROM {filefield_meta} WHERE fid = %d', $file->fid);
+@@ -77,6 +104,7 @@
+ function filefield_meta(&$file) {
+   $info = getid3_analyze($file->filepath);
+ 
++  $file->data = isset($file->data) ? $file->data : array();
+   $file->data['width'] = $file->data['height'] = $file->data['duration'] = 0;
+   if (isset($info['video']['resolution_x'])) {
+     $file->data['width'] = $info['video']['resolution_x'];
+@@ -93,7 +121,7 @@
+     $file->data['duration'] = $info['playtime_seconds'];
+   }
+ 
+-  // initialize fields. 
++  // Initialize fields. 
+   $file->data['audio_format'] = $file->data['audio_channel_mode'] = $file->data['audio_bitrate_mode'] = '';
+   $file->data['audio_sample_rate'] = $file->data['audio_bitrate'] = 0;
+  
+@@ -104,7 +132,48 @@
+     $file->data['audio_bitrate'] = isset($info['audio']['bitrate']) ? $info['audio']['bitrate'] : NULL; //e.g. 64000
+     $file->data['audio_bitrate_mode'] = isset($info['audio']['bitrate_mode']) ? $info['audio']['bitrate_mode'] : NULL; //e.g. cbr
+   }
+-};
++
++  // Add in arbitrary ID3 tags.
++  if (isset($info['tags_html'])) {
++    // We use tags_html instead of tags because it is the most reliable data
++    // source for pulling in non-UTF-8 characters according to getID3 docs.
++    foreach ($info['tags_html'] as $type => $values) {
++      // Typically $type may be IDv2 (for MP3s) or quicktime (for AAC).
++      foreach ($values as $key => $value) {
++        $value = isset($value[0]) ? (string) $value[0] : (string) $value;
++        if (!empty($value)) {
++          $file->data['tags'][$key] = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
++        }
++      }
++    }
++  }
++}
++
++/**
++ * Utility function that simply returns the current list of all known ID3 tags.
++ *
++ * If new or different ID3 tags are desired, these may be overridden by adding
++ * the following to your site's settings.php file.
++ *
++ * @code
++ * $conf['filefield_meta_tags'] = array(
++ *   'title' => t('Title'),
++ *   'artist' => t('Artist'),
++ *   'composer' => t('Composer'),
++ *   // etc...
++ * );
++ * @endcode
++ */
++function filefield_meta_tags() {
++  $defaults = array(
++    'title' => t('Title'),
++    'artist' => t('Artist'),
++    'album' => t('Album'),
++    'year' => t('Year'),
++    'genre' => t('Genre'),
++  );
++  return variable_get('filefield_meta_tags', $defaults);
++}
+ 
+ /**
+  * Convert the float duration into a pretty string.
+Index: filefield_meta.install
+===================================================================
+RCS file: /cvs/drupal-contrib/contributions/modules/filefield/filefield_meta/filefield_meta.install,v
+retrieving revision 1.8
+diff -u -r1.8 filefield_meta.install
+--- filefield_meta.install	22 May 2009 21:14:52 -0000	1.8
++++ filefield_meta.install	25 Apr 2010 05:10:57 -0000
+@@ -84,6 +84,11 @@
+         'not null' => TRUE,
+         'default' => '',
+       ),
++      'tags' => array(
++        'description' => 'ID3 tags such as artist, album, and genre.',
++        'type' => 'text',
++        'serialize' => TRUE,
++      ),
+     ),
+     'primary key' => array('fid'),
+   );
+@@ -129,4 +134,36 @@
+     'default' => '',
+   ));
+   return $ret;
+-}
+\ No newline at end of file
++}
++
++/**
++ * Add the tags column.
++ */
++function filefield_meta_update_6100(&$context) {
++  $ret = array();
++
++  // Set up our update and add the tags column.
++  if (!isset($context['sandbox']['progress'])) {
++    $context['sandbox']['progress'] = 0;
++    $context['sandbox']['total'] = db_result(db_query("SELECT COUNT(*) FROM {files} f INNER JOIN {filefield_meta} fm ON f.fid = fm.fid WHERE fm.audio_format <> ''"));
++    $context['sandbox']['current_fid'] = 0;
++
++    db_add_field($ret, 'filefield_meta', 'tags', array('type' => 'text'));
++  }
++
++  // Select and process 200 files at a time.
++  $limit = 200;
++  $result = db_query_range("SELECT f.* FROM {files} f INNER JOIN {filefield_meta} fm ON f.fid = fm.fid WHERE f.fid > %d AND fm.audio_format <> '' ORDER BY f.fid ASC", $context['sandbox']['current_fid'], 0, $limit);
++
++  // Loop through each file and read in its ID3 tags if applicable.
++  while ($file = db_fetch_object($result)) {
++    filefield_meta_file_update($file);
++    $context['sandbox']['current_fid'] = $file->fid;
++    $context['sandbox']['progress']++;
++  }
++
++  // Update our progress indicator.
++  $ret['#finished'] = $context['sandbox']['progress'] / $context['sandbox']['total'];
++
++  return $ret;
++}
+Index: fielfield_meta.token.inc
+===================================================================
+RCS file: fielfield_meta.token.inc
+diff -N fielfield_meta.token.inc
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ fielfield_meta.token.inc	1 Jan 1970 00:00:00 -0000
+@@ -0,0 +1,60 @@
++<?php
++// $Id$
++
++/**
++ * @file
++ * Token integration for FileField Meta.
++ */
++
++/**
++ * Implementation of hook_token_list().
++ *
++ * Provide a user readable list of FileField Meta tokens.
++ */
++function filefield_token_list($type = 'all') {
++  if ($type == 'field' || $type == 'all') {
++    $tokens['file']['filefield-width']               = t('File Video width');
++    $tokens['file']['filefield-height']              = t('File Video height');
++    $tokens['file']['filefield-duration']            = t('File Duration');
++    $tokens['file']['filefield-audio-format']        = t('File Audio Format path');
++    $tokens['file']['filefield-audio-sample-rate']   = t('File Audio sample rate');
++    $tokens['file']['filefield-audio-channel-mode']  = t('File Audio channel mode (stereo, mono)');
++    $tokens['file']['filefield-audio-bitrate']       = t('File Audio bitrate');
++    $tokens['file']['filefield-audio-bitrate-mode']  = t('File Audio bitrate mode (cbr, vbr, abr...)');
++
++    // ID3 tags.
++    foreach (filefield_meta_tags() as $tag => $label) {
++      $tokens['file']['filefield-tag-' . $tag] = t('File ID3 @tag tag', array('@tag' => $label));
++    }
++
++    return $tokens;
++  }
++}
++
++/**
++ * Implementation of hook_token_values().
++ *
++ * Provide the token values for a given file item.
++ */
++function filefield_token_values($type, $object = NULL) {
++  $tokens = array();
++  if ($type == 'field' && isset($object[0]['fid'])) {
++    $item = $object[0];
++
++    $tokens['filefield-width']               = $item['data']['width'] ;
++    $tokens['filefield-height']              = $item['data']['height'] ;
++    $tokens['filefield-duration']            = $item['data']['duration'] ;
++    $tokens['filefield-audio-format']        = isset($item['data']['audio_format']) ? $item['data']['audio_format'] : '';
++    $tokens['filefield-audio-sample-rate']   = $item['data']['sample_rate'] ;
++    $tokens['filefield-audio-channel-mode']  = isset($item['data']['audio_channel_mode']) ? $item['data']['audio_channel_mode'] : '';
++    $tokens['filefield-audio-bitrate']       = isset($item['data']['audio_bitrate']) ? $item['data']['audio_bitrate'] : '';
++    $tokens['filefield-audio-bitrate-mode']  = isset($item['data']['audio_bitrate_mode']) ? $item['data']['audio_bitrate_mode'] : '';
++
++    // ID3 tags.
++    foreach (filefield_meta_tags() as $tag => $label) {
++      $tokens['filefield-tag-title'] = isset($item['data']['tags'][$tag]) ? $item['data']['tags'][$tag] : '';
++    }
++  }
++
++  return $tokens;
++}
+Index: includes/filefield_meta_handler_field_tags.inc
+===================================================================
+RCS file: includes/filefield_meta_handler_field_tags.inc
+diff -N includes/filefield_meta_handler_field_tags.inc
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ includes/filefield_meta_handler_field_tags.inc	1 Jan 1970 00:00:00 -0000
+@@ -0,0 +1,44 @@
++<?php
++// $Id$
++
++/**
++ * @file
++ * A special handler that renders ID3 tags attached to a file.
++ */
++
++/**
++ * Render a field as a readable value in hours, minutes, and seconds.
++ *
++ * @ingroup views_field_handlers
++ */
++class filefield_meta_handler_field_tags extends views_handler_field {
++  function option_definition() {
++    $options = parent::option_definition();
++    $default = reset(array_keys(filefield_meta_tags()));
++    $options['tag'] = array('tag' => $default, 'required' => TRUE, 'translatable' => TRUE);
++    return $options;
++  }
++
++  function options_form(&$form, &$form_state) {
++    parent::options_form($form, $form_state);
++
++    $form['relationship']['#weight'] = -2;
++    $form['tag'] = array(
++      '#type' => 'select',
++      '#title' => t('ID3 tag'),
++      '#required' => TRUE,
++      '#default_value' => $this->options['tag'],
++      '#options' => filefield_meta_tags(),
++      '#description' => t('Select the tag to be rendered. If needing multiple tags, add another ID3 tags field.'),
++      '#weight' => -1,
++    );
++  }
++
++  function render($values) {
++    $value = unserialize($values->{$this->field_alias});
++    $tag = $this->options['tag'];
++    if (isset($value[$tag])) {
++      return check_plain($value[$tag]);
++    }
++  }
++}

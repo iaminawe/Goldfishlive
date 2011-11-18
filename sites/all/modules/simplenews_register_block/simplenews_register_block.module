@@ -1,0 +1,112 @@
+<?php
+// $Id: simplenews_register_block.module,v 1.1.2.2 2009/07/29 20:22:06 jrglasgow Exp $
+/**
+ * @file
+ *
+ * Provides e-mail and username fields in the Simplenews Newsletter block when
+ * registration is required for newsletter subscription and the Simplenews on
+ * Register module is enabled and configured for the given newsletter
+ */
+
+
+/**
+ * modify the available variables for the simplenews block
+ */
+function simplenews_register_block_preprocess_simplenews_block(&$variables) {
+  global $user;
+  $variables['optout'] = variable_get('simplenews_register_'. $variables['tid'] .'_optout', 0);
+  if (empty($user->uid) && !user_access('subscribe to newsletters') && $variables['optout'] && $variables['use_form']) {
+    // anonymous users can't subscribe, so we will sign them up for an account
+    $variables['form'] = drupal_get_form('user_register', array('form_context' => 'simplenews_block', 'simplenews_tid' => $variables['tid']));
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function simplenews_register_block_form_alter(&$form, $form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_register':
+      if ($form['#parameters'][2]['form_context'] == 'simplenews_block') {
+        // we are in the simplenews block
+        $tid = $form['#parameters'][2]['simplenews_tid'];
+        unset($form['account']['name']['#description']);
+        $form['account']['name']['#title'] = t('Name');
+        unset($form['account']['#type']);
+        unset($form['account']['mail']['#description']);
+        unset($form['simplenews']['#type']);
+        $form['account']['name']['#size'] = 25;
+        $form['account']['mail']['#size'] = 25;
+        $form['submit']['#value'] = t('Subscribe');
+        
+        foreach ($form['simplenews'] AS $key => $value) {
+          if ($key != 'simplenews-'. $tid) {
+            unset($form['simplenews'][$key]);
+          }
+        }
+        // use our validate function first
+        $validate = array(
+          'simplenews_register_block_user_register_validate'
+        );
+        $validate = array_merge($validate, $form['#validate']);
+        $form['#validate'] = $validate;
+      }
+      break;
+  }
+}
+
+/**
+ * Validation function for the user_register form
+ *
+ * check to see if the username is in use and give a new username if it is
+ */
+function simplenews_register_block_user_register_validate(&$form, &$form_state) {
+  $name_orig = $form_state['values']['name'];
+  // check to see if the given name is taken
+   $sql = "
+    SELECT
+      name
+    FROM
+      {users}
+    WHERE
+      name LIKE '%s'
+  ";
+  $result = db_query($sql, $name_orig);
+  if (!$result) {
+    // the name is not taken
+    return NULL;
+  }
+  
+  // the given name is taken, find a new one
+  
+  $name = str_replace(' ', '_', strtolower($form_state['values']['name']));
+  $sql = "
+    SELECT
+      name
+    FROM
+      {users}
+    WHERE
+      name LIKE '%%%s%%'
+  ";
+  $result = db_query($sql, $name);
+  $names = array();
+  while ($row = db_fetch_object($result)) {
+    $names[strtolower($row->name)] = $row->name;
+  }
+  
+  $done = FALSE;
+  $count = 0;
+  while (!$done) {
+    $new_name = $name .'_'. $count;
+    if (!isset($names[$new_name])) {
+      // the name is not taken
+      $done = TRUE;
+    }
+    else {
+      $count++;
+    }
+  }
+  drupal_set_message(t('The name @orig_name is taken, you have been assigned the name @new_name.', array('@new_name' => $new_name, '@orig_name' => $name_orig)), 'warning');
+  
+  $form_state['values']['name'] = $new_name;
+}

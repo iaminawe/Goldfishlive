@@ -1,0 +1,186 @@
+<?php
+// $Id: itweak_upload.module,v 1.1 2009/07/04 05:37:39 iva2k Exp $
+
+/**
+ * @file
+ * iTweakUpload - Tweak file upload form.
+ */
+
+/**
+ * Implementation of hook_init().
+ */
+function itweak_upload_init() {
+  drupal_add_css(drupal_get_path('module', 'itweak_upload') . '/itweak_upload.css');
+}
+
+/**
+ * Worker code for itweak_upload_form_alter().
+ * Modify a bit the attachment fieldset, add js.
+ */
+function _itweak_upload_upload_form_alter(&$form, $form_state, $type) {
+  drupal_add_js(drupal_get_path('module', 'itweak_upload') . '/itweak_upload.js');
+  $form['attachments']['#collapsible'] = 0;	//FIXME: make configurable
+  $form['attachments']['#collapsed'] = 0;	//FIXME: make configurable
+  $form['attachments']['#title'] = t('Attach files to this @type', array('@type' => $type));
+  global $user;
+  $limits = _upload_file_limits($user);
+  $form['attachments']['#description'] = ($limits['resolution'] ? t('Images are larger than %resolution will be resized. ', array('%resolution' => $limits['resolution'])) : '') . t('Files must be smaller than %filesize and have one of the following extensions: %extensions.', array('%filesize' => format_size($limits['file_size']), '%extensions' => $limits['extensions']));
+  $form['buttons']['#weight'] = 100;
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function itweak_upload_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form['type']) && isset($form['#node'])) {
+    if ($form['type']['#value'] .'_node_form' == $form_id) {
+      _itweak_upload_upload_form_alter($form, $form_state, strtolower(node_get_types('name', $form['#node']->type)));
+    }
+  }
+
+  if ($form_id == 'comment_form') {
+      _itweak_upload_upload_form_alter($form, $form_state, 'comment');
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function itweak_upload_theme() {
+  return array(
+    // Using explicit 'function' setting here allows to avoid namespace collisions.
+    // Was not able to find that method in handbooks. [iva2k]
+    'upload_form_new' =>  array(
+      'arguments' => array('form' => NULL),
+      'function' => 'itweak_upload_upload_form_new',
+    ),
+    'comment_upload_form_new' =>  array(
+      'arguments' => array('form' => NULL),
+      'function' => 'itweak_upload_comment_upload_form_new',
+    ),
+    'upload_form_current' =>  array(
+      'arguments' => array('form' => NULL),
+      'function' => 'itweak_upload_upload_form_current',
+    ),
+    'comment_upload_form_current' =>  array(
+      'arguments' => array('form' => NULL),
+      'function' => 'itweak_upload_comment_upload_form_current',
+    ),
+    'upload_attachments' => array(
+      'arguments' => array('files' => NULL),
+      'function' => 'itweak_upload_upload_attachments',
+    ),
+    'comment_upload_attachments' => array(
+//?
+      'arguments' => array('files' => NULL, 'display_images' => FALSE, 'preset' => NULL),
+//      'arguments' => array('files' => NULL),
+      'function' => 'itweak_upload_comment_upload_attachments',
+    ),
+  );
+}
+
+
+/**
+ * Implementation of theme_upload_form_new().
+ * Theme the fieldset for new attachment. 
+ */
+function itweak_upload_upload_form_new($form) {
+  unset($form['new']['upload']['#title']);
+  unset($form['new']['upload']['#description']);
+  drupal_add_tabledrag('upload-attachments', 'order', 'sibling', 'upload-weight');
+  return drupal_render($form);
+}
+
+/**
+ * Implementation of theme_upload_form_current().
+ * Theme the upload form for current attachments.
+ */
+function itweak_upload_upload_form_current(&$form) {
+
+  drupal_add_tabledrag('upload-attachments', 'order', 'sibling', 'upload-weight');
+
+  foreach (element_children($form) as $key) {
+    // Add class to group weight fields for drag and drop.
+    $form[$key]['weight']['#attributes']['class'] = 'upload-weight';
+    $row = array('');
+    $output = '';
+    // Description: we save the URL, remove it as a description and change the size of the input
+    $url = $form[$key]['description']['#description'];
+    unset($form[$key]['description']['#description']);
+    $form[$key]['description']['#size'] = 40;
+    $form[$key]['description']['#attributes'] = array('class' => 'rename');
+    $output .= drupal_render($form[$key]['description']);
+    // Size & URL
+    $output .= '<span class="details">'. drupal_render($form[$key]['size']) .' - '. $url .'</span>';
+    $row[] = array(
+      'data' => $output,
+      'class' => 'file container-inline'
+    );
+    // Remove
+    $form[$key]['remove']['#attributes'] = array('class' => 'remove');
+    $form[$key]['remove']['#suffix'] = ' '. t('Remove');
+	$row[] = array(
+      'data' => drupal_render($form[$key]['remove']),
+      'class' => 'remove container-inline'
+    );
+    // List
+    $form[$key]['list']['#suffix'] = ' '. t('List');
+	$row[] = array(
+      'data' => drupal_render($form[$key]['list']),
+      'class' => 'list container-inline'
+    );
+    // Weight
+    $row[] = drupal_render($form[$key]['weight']);
+    // Add the extension as a class for styling
+    $extension = strtolower(substr(strrchr($form[$key]['filename']['#value'], '.'), 1));
+    $rows[] = array('data' => $row, 'class' => 'draggable mime-'. $extension);
+  }
+  $output = theme('table', array(), $rows, array('id' => 'upload-attachments'));
+  $output .= drupal_render($form);
+  return $output;
+}
+
+/**
+ * Implementation of theme_upload_attachments().
+ * Theme the attachments output.
+ */
+function itweak_upload_upload_attachments($files) {
+  $items = array();
+  foreach ($files as $file) {
+    $file = (object)$file;
+    if ($file->list && empty($file->remove)) {
+      $extension = strtolower(substr(strrchr($file->filename, '.'), 1));
+      $href = file_create_url($file->filepath);
+      $text = $file->description ? $file->description : $file->filename;
+      $items[] = array(
+        'data' => l($text, $href) .' - '. format_size($file->filesize),
+        'class' => 'mime-'. $extension,
+      );
+    }
+  }
+  if (count($items)) {
+    return theme('item_list', $items, $title = NULL, $type = 'ul', array('class' => 'attachment-list', 'id' => 'attachments'));
+  }
+}
+
+/**
+ * Stubs for comment_upload theme. Same as upload, therefore simple redirects.
+ */
+/**
+ * Implementation of theme_comment_upload_form_new().
+ */
+function itweak_upload_comment_upload_form_new($form) {
+  return itweak_upload_upload_form_new($form);
+}
+/**
+ * Implementation of theme_comment_upload_form_current().
+ */
+function itweak_upload_comment_upload_form_current(&$form) {
+  return itweak_upload_upload_form_current($form);
+}
+/**
+ * Implementation of theme_comment_upload_attachments().
+ */
+function itweak_upload_comment_upload_attachments($files) {
+  return itweak_upload_upload_attachments($files);
+}

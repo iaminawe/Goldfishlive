@@ -1,0 +1,13 @@
+name=Simplenews Register Block
+description=Provides e-mail and username fields in the Simplenews Newsletter block when registration is required for newsletter subscription and the Simplenews on Register module is enabled and configured for the given newsletter
+core=6.x
+dependencies[]=simplenews
+dependencies[]=simplenews_register
+package=Mail
+; $Id: simplenews_register_block.info,v 1.1.2.1 2009/07/29 20:11:41 jrglasgow Exp $
+; Information added by drupal.org packaging script on 2009-07-29
+version = "6.x-1.0"
+core = "6.x"
+project = "simplenews_register_block"
+datestamp = "1248899840"
+

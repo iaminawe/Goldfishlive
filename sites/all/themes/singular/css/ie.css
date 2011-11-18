@@ -1,0 +1,294 @@
+#page {
+/* Fallback for web browsers that doesn't support RGBa */
+
+background: rgb(255, 255, 255) transparent;
+
+
+/* For IE 5.5 - 7*/
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+
+/* For IE 8*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+
+}
+
+#page #content {
+  
+/* Fallback for web browsers that doesn't support RGBa */
+
+background: rgb(248, 248, 248) transparent;
+
+/* For IE 5.5 - 7*/
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000, endColorstr=#7F000000);
+
+/* For IE 8*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000, endColorstr=#7F000000)";
+
+  border-top:1px solid #ddd;
+  padding:19px 20px 20px;
+  -moz-border-radius:10px;
+  -webkit-border-radius: 10px;
+  
+  }
+  
+#sidebar {
+-moz-border-radius:5px;
+
+
+font-size:13px;
+line-height:20px;
+
+background: rgb(25, 25, 25) transparent;
+
+/* For IE 5.5 - 7*/
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000, endColorstr=#7F000000);
+
+/* For IE 8*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000, endColorstr=#7F000000)";
+  
+  color:#fff;
+position: relative;
+top: 90px;
+  margin:100px 0px 0px;
+  float:right;
+  width:220px;
+
+     -webkit-border-radius: 10px;
+
+    -moz-border-radius:10px;
+  }
+  
+
+
+/* @group Superfish */
+
+/*** Adding the class sf-navbar in addition to sf-menu creates an all-horizontal nav-bar menu ***/
+#superfish-1{
+	position: relative;
+left:0px;
+	clear: both;
+	background: transparent;
+
+}
+#navmenu{
+	position: relative;
+	z-index:99;
+	padding-top: 10px;
+height: 5px;
+top: -225px;
+left: -10px;
+}
+
+.sf-breadcrumb{
+	
+}
+.sf-navbar {
+
+  padding-bottom: 2.5em !important;
+  padding-left: 0 !important;
+  position: relative;
+  width: 100%;
+  z-index: 999;
+left: -30px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+
+background: transparent;
+font-size: 1.1em;
+
+}
+
+.sf-navbar li  {
+  position: static;
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+margin-right: 5px;
+
+
+
+}
+.sf-navbar a {
+  border-top: none;
+   color:whitesmoke;
+font-weight: bold;
+font-family: Helvetica;
+}
+.sf-navbar li ul {
+  width: 100%; /*IE6 soils itself without this*/
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+
+}
+.sf-navbar li li {
+  position: relative;
+  -webkit-border-radius:5px;
+-moz-border-radius: 5px;
+margin-right: 5px;
+
+
+}
+.sf-navbar li li ul {
+  width: 14em;
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+
+
+}
+.sf-navbar li li li {
+  width: 100%;
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+
+}
+.sf-navbar ul li {
+  width: auto;
+  float: left;
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+
+}
+.sf-navbar a, .sf-navbar a:visited {
+  border: none;
+
+  
+}
+ul.sf-navbar .current ul,
+ul.sf-navbar ul li:hover ul,
+ul.sf-navbar ul li.sfHover ul {
+  left: 0;
+  top: 2.5em; /* match top ul list item height */
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+
+
+}
+ul.sf-navbar .current ul ul {
+  top: -999em;
+}
+.sf-navbar li li.current > a {
+  font-weight: bold;
+ 
+}
+/*** Point all arrows down ***/
+.sf-navbar ul .sf-sub-indicator {
+  background-position: -10px -100px;
+}
+.sf-navbar ul a > .sf-sub-indicator {
+background-position: 0 -100px;
+}
+/* Apply hovers to modern browsers */
+.sf-navbar ul a:focus > .sf-sub-indicator,
+.sf-navbar ul a:hover > .sf-sub-indicator,
+.sf-navbar ul a:active > .sf-sub-indicator,
+.sf-navbar ul li:hover > a > .sf-sub-indicator,
+.sf-navbar ul li.sfHover > a > .sf-sub-indicator {
+  background-position: -10px -100px; /* arrow hovers for modern browsers*/
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+/* Point right for anchors in subs */
+.sf-navbar ul ul .sf-sub-indicator {
+  background-position: -10px 0;
+}
+.sf-navbar ul ul a > .sf-sub-indicator {
+  background-position: 0 0;
+}
+/* Apply hovers to modern browsers */
+.sf-navbar ul ul a:focus > .sf-sub-indicator,
+.sf-navbar ul ul a:hover > .sf-sub-indicator,
+.sf-navbar ul ul a:active > .sf-sub-indicator,
+.sf-navbar ul ul li:hover > a > .sf-sub-indicator,
+.sf-navbar ul ul li.sfHover > a > .sf-sub-indicator {
+  background-position: -10px 0; /* arrow hovers for modern browsers*/
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+/*** Remove shadow on first submenu ***/
+.sf-navbar > li > ul {
+  background: transparent;
+  padding: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topright: 0;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+}
+/* $Id: light-blue.css,v 1.4 2010/03/27 09:18:40 mehrpadin Exp $ */
+.sf-menu.sf-style-light-blue{
+	text-transform: uppercase;
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+
+}
+.sf-navbar.sf-style-light-blue a{
+  border: 0;
+  color: white;
+
+}
+.sf-menu.sf-style-light-blue li,
+.sf-navbar.sf-style-light-blue {
+  
+  /*fallback*/
+background: rgba(20,21,21);
+
+  
+ 
+  
+}
+
+.sf-menu.sf-style-light-blue li li {
+margin-top: 5px;
+background-color: rgba(20,21,21);
+
+	text-transform: none;
+}
+.sf-menu.sf-style-light-blue li li a:hover{
+	
+background-color: rgba(247,247,247);
+
+color: black;
+
+}
+.sf-menu.sf-style-light-blue li li li{
+  background: transparent;
+
+}
+.sf-menu.sf-style-light-blue li:hover,
+.sf-menu.sf-style-light-blue li.sfHover,
+.sf-menu.sf-style-light-blue li.active a,
+.sf-menu.sf-style-light-blue a:focus,
+.sf-menu.sf-style-light-blue a:hover,
+.sf-menu.sf-style-light-blue a:active,
+.sf-navbar.sf-style-light-blue li li{
+ 
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+	background-color: #ff8d00;
+}
+.sf-navbar.sf-style-light-blue li ul {
+background: transparent;
+  width: 100%;
+  -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+margin-left: 0;
+}
+.sf-navbar.sf-style-light-blue li ul li ul {
+  background-color: transparent;
+  
+}
+.sf-menu.sf-style-light-blue .sf-sub-indicator {
+
+}
+.sf-menu.rtl.sf-style-light-blue .sf-sub-indicator {
+
+}
+
+
+/* visited pseudo selector so IE6 applies text colour */
+
+/* styles for Superfish primary menu */
+
+/* 2nd Level */
+
+/* 3rd Level */
+
+/* @end */

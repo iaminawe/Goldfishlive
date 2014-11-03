@@ -74,6 +74,7 @@ DirectoryIndex index.php
     ExpiresActive Off
   </FilesMatch>
 </IfModule>
+ 
 
 # Various rewrite rules.
 <IfModule mod_rewrite.c>
@@ -113,10 +114,6 @@ RewriteRule ^(.*/)*\.svn/ / [F,L]
   RewriteCond %{REQUEST_URI} !=/favicon.ico
   RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
   
-    
-  //301 Redirect Old File
-Redirect 301 www.goldfishlive.com/downloads http://www.downloadmusic.nl/acties/goldfish/
-
 </IfModule>
 
 # $Id: .htaccess,v 1.90.2.5 2010/02/02 07:25:22 dries Exp $

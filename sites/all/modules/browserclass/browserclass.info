@@ -1,0 +1,9 @@
+name = Browser class
+description = Add browser class to body element
+core = 6.x
+; Information added by drupal.org packaging script on 2011-05-14
+version = "6.x-1.8"
+core = "6.x"
+project = "browserclass"
+datestamp = "1305376615"
+

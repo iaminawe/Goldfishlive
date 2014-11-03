@@ -213,36 +213,21 @@ function twitter_pull_block_data() {
 
 /****** FOR TESTING ONLY. KEEP DISABLED AT ALL TIMES UNLESS DEBUGGING ******/
 
-
+/*
 function twitter_pull_menu() {
   $items = array();
 
-  /*
   $items['twitter/pull/test'] = array(
     'title' => 'Twitter Pull Test',
     'page callback' => 'twitter_pull_test',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-   */
-
-  $items['admin/settings/twitter_pull'] = array(
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('twitter_pull_config_page'),
-    'access arguments' => array('administer site configuration'),
-    'file' => 'twitter_pull.admin.inc',
-    'file path' => drupal_get_path('module', 'twitter_pull'),
-    'type' => MENU_NORMAL_ITEM,
-    'description' => t('Configure twitter_pull module.'),
-    'title' => 'twitter_pull',    
-  );
 
   return $items;
 }
 
-/*
 function twitter_pull_test() {
   return twitter_pull_render('@inadarei');
 }
- */
-
+*/

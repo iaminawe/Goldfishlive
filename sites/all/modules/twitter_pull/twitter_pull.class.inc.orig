@@ -47,49 +47,35 @@ class twitter_puller {
 
     // lists have the format @username/listname
     if ($prefix == '@' && $slash !== FALSE) {
+      $username = drupal_substr($this->twitkey, 1, $slash - 1);
       $listname = drupal_substr($this->twitkey, $slash + 1);
-      $url = 'https://api.twitter.com/1.1/lists/show.json';
-      $query = '?slug=' . urlencode($listname);
+      $url = 'http://api.twitter.com/1/'. urlencode($username) .'/lists/'. urlencode($listname) .'/statuses.json?per_page='. $num;
     }
     // if the first character is @, then consider the key a username
     elseif ($prefix == "@") {
       $key = drupal_substr($this->twitkey, 1);
-      $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-      $query = "?screen_name=${key}&count=${num}&include_rts=1";
+      $url = 'http://api.twitter.com/1/statuses/user_timeline.json?screen_name='. urlencode($key) .'&include_rts=true&count='. $num;   
     }
     // otherwise, use the key as a search term
     else {
       if ($num > 100) {
         $num = 100;
       }
-      $url = 'https://api.twitter.com/1.1/search/tweets.json';
-      $query = '?q=' . urlencode($this->twitkey) ."&include_entities=true&count=${num}";
+      $url = 'http://search.twitter.com/search.json?q='. urlencode($this->twitkey) .'&rpp='. $num;
     }
 
-    $lib = 'sites/all/libraries/twitter-api-php';
-    if (!file_exists($lib)) {
-      drupal_set_message(t('Please install TwitterAPIExchange as a library.  http://github.com/j7mbo/twitter-api-php'), 'error');
-      return;
-    }
-    require_once($lib . '/TwitterAPIExchange.php');
+    $ret = drupal_http_request($url);
 
-    $settings = array();
-    foreach (array('consumer_key', 'consumer_secret', 'oauth_access_token', 'oauth_access_token_secret') as $var) {
-      $settings[$var] = variable_get('twitter_pull_'.$var, FALSE);
-    }
-
-    if (in_array(FALSE, $settings, TRUE)) {
-      drupal_set_message('Twitter has not been configured yet.  Please contact your admin.', 'error');
-      return;
+    if ($ret->code < 200 || $ret->code > 399) {
+      $errmsg = json_decode($ret->data);
+      $errmsg = t('The error message received was: @message.', array('@message' => $errmsg->error));
+      if ($ret->code == 400) {
+        $errmsg .= t('This site may be subject to rate limiting. For more information, see:') . 'http://apiwiki.twitter.com/Rate-limiting';
+      }
+      throw new Exception(t('Could not retrieve data from Twitter.') .' '. $errmsg);
     }
 
-
-
-    $twitter = new TwitterAPIExchange($settings);
-    $req = $twitter->setGetfield($query)
-      ->buildOauth($url, 'GET')
-      ->performRequest();
-    $items = json_decode($req);
+    $items = json_decode($ret->data);
     $this->parse_items($items);
 
   }
@@ -98,8 +84,8 @@ class twitter_puller {
     $tweets = array();
 
     //-- If search response then items are one level lower.
-    if (isset($items->statuses) && is_array($items->statuses)) {
-      $items = $items->statuses;
+    if (isset($items->results) && is_array($items->results)) {
+      $items = $items->results;
     }
 
     if (is_array($items)) {

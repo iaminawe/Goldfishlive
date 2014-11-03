@@ -18,7 +18,7 @@
 
 <div id="header-image"></div>
   <div id='root'>
-  <?php if ($logo) { ?><a href="<?php print $base_path ?>" title="<?php print t('Home') ?>"><img src="<?php print $logo ?>" alt="<?php print t('Home') ?>" /></a><?php } ?>
+  <?php if ($logo) { ?><div class="logo"><a href="<?php print $base_path ?>" title="<?php print t('Home') ?>"><img src="<?php print $logo ?>" alt="<?php print t('Home') ?>" /></a></div><?php } ?>
    
      <?php if (!empty($left)): ?>
     <div id='sidebarleft'><div class='sidebar-left-wrapper clear-block'><?php print $left ?></div></div>

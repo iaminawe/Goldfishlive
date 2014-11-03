@@ -1,25 +1,4 @@
-<<<<<<< HEAD:sites/all/themes/singular/style.css
-/* @override 
-	http://goldfishlive.com/sites/all/themes/singular/style.css?g
-=======
-/* @override
-	http://www.goldfishlive.com/sites/all/themes/singular/style.css?i
-	http://goldfishlive.com/sites/all/themes/singular/style.css?i
-	http://goldfishlive.com/sites/all/themes/singular/style.css?m
-	http://goldfishlive.com/sites/all/themes/singular/style.css?S
-	http://goldfishlive.com/sites/all/themes/singular/style.css?0
-	http://goldfishlive.com/sites/all/themes/singular/style.css?s
-	http://goldfishlive.com/sites/all/themes/singular/style.css?9
-	http://goldfishlive.com/sites/all/themes/singular/css/forms.css?E
-	http://goldfishlive.com/sites/all/themes/singular/style.css?F
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
-	http://goldfishlive.com/sites/all/themes/singular/style.css?y
-	http://goldfishlive.com/sites/all/themes/singular/style.css?i
-	http://goldfishlive.com/sites/all/themes/singular/style.css?h
-	http://goldfishlive.com/sites/all/themes/singular/style.css?K
-	http://goldfishlive.com/sites/all/themes/singular/style.css?k
-	http://goldfishlive.com/sites/all/themes/singular/style.css?D
-*/
+
 
 body {
   color: #421e00;
@@ -53,19 +32,15 @@ left: 5px;
  -moz-border-radius:10px;
 
   }
-<<<<<<< HEAD:sites/all/themes/singular/style.css
-  
+
+
  #block-block-10{
 clear: both;
 top: 10px;
   position: relative;
 }
- 
- 
-=======
 
 
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
 #sidebarleft {
   -moz-border-radius:5px;
   font-size:13px;
@@ -99,15 +74,10 @@ top: 10px;
 
   background: rgba(25,25,25) url(images/mask.png);
   background: rgba(25,25,25,0.7) url(images/mask.png);
-<<<<<<< HEAD:sites/all/themes/singular/style.css
-  
+
+
  top: 10px;
-  
-=======
 
-
-
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
   width:600px;
     z-index: 2;
     position: relative;
@@ -175,9 +145,9 @@ a {
   color: #fdc826;
   text-decoration:none;
   }
-  
-  
-  
+
+
+
 
 .page-admin #content a{
     color: #2A180B !important;
@@ -189,10 +159,10 @@ a {
 
 }
 
-<<<<<<< HEAD:sites/all/themes/singular/style.css
+
 a:link,
 a:visited {
-  
+
  color: #fbf4ce;
   font-variant: normal;
 }
@@ -202,10 +172,9 @@ a:focus,
 a:active {
  color: white;
   text-decoration: none;
-=======
+}
 a:link,
 a:visited {
-
  color: #ff8500;
 }
 
@@ -214,7 +183,7 @@ a:focus,
 a:active {
  color: orange;
   text-decoration: none;
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
+
 }
 
 
@@ -223,7 +192,6 @@ h1, h2, h3, h4, h5, h6 {
 
   font-weight: normal;
   line-height: 100%;
-<<<<<<< HEAD:sites/all/themes/singular/style.css
   margin-bottom: 5px;
 
 }
@@ -232,7 +200,6 @@ h1, h2, h3, h4, h5, h6 {
 h1,
 h1.title {
   font-size: 250%;   /* 30px/12px */
-=======
 
 
 }
@@ -241,7 +208,6 @@ h1.title {
 h1,
 h1.title {
   font-size: 250%;   /* 30px/12px */
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
   color: #FFF;
 
 
@@ -251,11 +217,9 @@ h2 {
   font-size: 300%;   /* 24px/12px */
   padding-bottom:10px;
    font-family:  Arial, Helvetica, Geneva, sans-serif;
-<<<<<<< HEAD:sites/all/themes/singular/style.css
- line-height: 90%;
-=======
 
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
+ line-height: 90%;
+
 }
 
 #HomeBlog h2.title{
@@ -290,16 +254,9 @@ h3 {
 h4 {
   font-size: 160%;   /* 14px/12px */
   line-height:100%;
-<<<<<<< HEAD:sites/all/themes/singular/style.css
   padding-bottom: 5px;
 }
 
-
-
-=======
-  padding-bottom: 5px;
-}
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
 h4.title a{
   z-index: 999;
   color: #2A180B !important;
@@ -348,7 +305,7 @@ h1.site-name {
 background: rgb(255, 255, 255);
 
 /* RGBa with 0.6 opacity */
-background: #F68E1D; 
+background: #F68E1D;
 
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
@@ -359,10 +316,7 @@ background: #F68E1D;
  * Tabs ===============================================================
  */
 div.page-header { padding: 0 20px;
-<<<<<<< HEAD:sites/all/themes/singular/style.css
 
-=======
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
 }
 
 div.page-header ul.links {
@@ -382,14 +336,13 @@ div.page-header ul.links li.active a {
  * Page content =======================================================
  */
 #page #content {
-<<<<<<< HEAD:sites/all/themes/singular/style.css
-=======
+
 
 
 /* Fallback for web browsers that doesn't support RGBa */
 
 background: rgb(248, 248, 248);
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
+
 
 
   padding:19px 20px 20px;
@@ -397,15 +350,13 @@ background: rgb(248, 248, 248);
   -webkit-border-radius: 10px;
   float: left;
   width: 540px;
-<<<<<<< HEAD:sites/all/themes/singular/style.css
+
 background-color: #F68E1D;
 margin-top: 5px;
 
 }
-=======
 
-  }
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
+
 
 #page #content div.block {
   margin:20px 0px 0px;
@@ -1001,8 +952,8 @@ blockquote {
 .search-box-inner .searchButtonPng {
   margin: -1px 0 0 10px;
   padding: 0;
-<<<<<<< HEAD:sites/all/themes/singular/style.css
-  
+
+
 }
 
 
@@ -1025,7 +976,7 @@ blockquote {
 
 /* Header top region */
 .header-top-region {
- 
+
   padding: 20px 0 0 0;
 }
 
@@ -1054,7 +1005,7 @@ blockquote {
 .header-group .inner {
   color: #b0b0b0;
 
-  
+
 }
 
 .header-wrapper .header a:link,
@@ -1166,9 +1117,8 @@ left: 205px;
 }
 
 /* Primary Menu
-/-------------------------------------------------------------- 
-=======
-}
+/--------------------------------------------------------------
+
 
 .search-box-inner #search-input input {
   margin: 2px 0 0 0;
@@ -1195,7 +1145,7 @@ left: 205px;
 
 /* Primary Menu
 /--------------------------------------------------------------
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
+
 #header-image{
 background-image: url(../../../default/files/colouredballs2.png);
 width: 100%;
@@ -1512,12 +1462,10 @@ position: relative;
   height: 30px;
   z-index: 3;
   float: left;
-<<<<<<< HEAD:sites/all/themes/singular/style.css
+
   display: block;
     background-color: #FFF;
-=======
 
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
 }
 
 .views-showcase-big-panel .views-showcase-title a {
@@ -1834,18 +1782,17 @@ margin-left: 0;
 
 /* @group Table */
 
-<<<<<<< HEAD:sites/all/themes/singular/style.css
 /* Tables
 /-------------------------------------------------------------- */
 thead th,
 th {
   background: #F68E1D;
- 
+
   padding: 3px 10px;
 }
 
 tbody th {
- 
+
 }
 
 tr.even,
@@ -1873,7 +1820,7 @@ tr.odd td {
 tr.drag td,
 tr.drag-previous td {
   background: #ffd;
-=======
+}
 /* Tables
 /-------------------------------------------------------------- */
 thead th,
@@ -1901,14 +1848,14 @@ tr.odd td {
 tr.drag td,
 tr.drag-previous td {
   background: #ffd;
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
+
 }
 
 /* @end */
 
 /* @group Pagers */
 
-<<<<<<< HEAD:sites/all/themes/singular/style.css
+
 /* Pagers
 -------------------------------------------------------------- */
 
@@ -1963,7 +1910,7 @@ ul.pager li a:hover,
 ul.pager li a:focus {
   background-color: #888;
   color: #fff;
-=======
+
 /* Pagers
 -------------------------------------------------------------- */
 
@@ -2021,7 +1968,6 @@ ul.pager li a:hover,
 ul.pager li a:focus {
   background-color: #888;
   color: #fff;
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
   text-decoration: none;
 
 }
@@ -3147,7 +3093,6 @@ background-color: #F68E1D;
 
 /* @group SM Album Previews */
 
-<<<<<<< HEAD:sites/all/themes/singular/style.css
 /*
 
  SoundManager 2: "page as playlist" example
@@ -3387,7 +3332,6 @@ ul.playlist li .timing {
  letter-spacing:0px;
  font:44% monaco,"VT-100",terminal,"lucida console",courier,system;
  line-height:1em;
-=======
 /*
 
  SoundManager 2: "page as playlist" example
@@ -3626,7 +3570,6 @@ ul.playlist li .timing {
  letter-spacing:0px;
  font:44% monaco,"VT-100",terminal,"lucida console",courier,system;
  line-height:1em;
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
  vertical-align:middle;
  color: black;
 }
@@ -3751,9 +3694,7 @@ ul.playlist div.sm2-filelink li.sm2_paused a {
   text-transform: lowercase;
 }
 
-
-<<<<<<< HEAD:sites/all/themes/singular/style.css
-.read-more{ 
+.read-more{
 margin-top: 10px;
 float: right;
     padding: 3px 6px;
@@ -3781,7 +3722,7 @@ float: right;
     -webkit-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
     -moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
     -o-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5); } 
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5); }
 
 
 .read-more:active { background: orange; }
@@ -3790,14 +3731,14 @@ float: right;
 {
      color: white !important;
 }
-=======
+
 .read-more{
 margin-top: 10px; float: right ; background: rgba(255,255,255,0.7); padding: 4px 8px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;  color: white; font-size: 12px; text-decoration: none; vertical-align: middle; }
 
 .read-more:hover { border-top-color: #087fcf; color:#ccc; }
 
 .read-more:active { border-top-color: #1b435e; background: #orange; }
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
+
 
 /* @end */
 
@@ -3905,7 +3846,7 @@ padding-bottom: 10px;
 /* @group Juitter */
 
 /*JUITTER PLUGIN CSS*/
-<<<<<<< HEAD:sites/all/themes/singular/style.css
+
 
 #juitterContainer{} /*Juitter container*/
 
@@ -3913,7 +3854,7 @@ padding-bottom: 10px;
 
 /* Bellow th e list of tweets "<li>" */
 
-#juitterContainer .twittLI{list-style:none;margin:0;padding:5px 0 0 0;border-bottom:dashed 1px #999;padding:3px;clear:both;min-height:60px; line-height: 15px; font-size: 12px;} 
+#juitterContainer .twittLI{list-style:none;margin:0;padding:5px 0 0 0;border-bottom:dashed 1px #999;padding:3px;clear:both;min-height:60px; line-height: 15px; font-size: 12px;}
 #juitterContainer .twittLI:hover{background-color:#D37919;}
 #juitterContainer .twittList SPAN.time{color:#777;font-size:0.9em}
 #juitterContainer .twittList A{color: #fceecc;} /*Links inside the tweets list */
@@ -3924,8 +3865,8 @@ padding-bottom: 10px;
 #juitterContainer .jRM{float:right;clear:both} /*read it on twitter link*/
 #juitterContainer .extLink{} /*CSS for the external links*/
 #juitterContainer .hashLink{} /*CSS for the hash links*/
-/* Bellow the CSS for the search box */
-=======
+
+/* Bellow the CSS for the search box */
 
 #juitterContainer{} /*Juitter container*/
 
@@ -3946,7 +3887,6 @@ padding-bottom: 10px;
 #juitterContainer .hashLink{} /*CSS for the hash links*/
 
 /* Bellow the CSS for the search box */
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
 
 #juitterSearch {margin:0 0 2em 0.5em;}
 #juitterSearch input {border:1px solid #aaa; padding:0.5em;width:30em;}
@@ -4034,13 +3974,10 @@ color: orange !important;
 .eventitem{
 	position: relative;
 	float: left;
-<<<<<<< HEAD:sites/all/themes/singular/style.css
-
-=======
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
->>>>>>> 419ee96b4e2cfcc3231654a76019ed524941f2a1:sites/all/themes/singular/style.css
+
 	margin-bottom: 10px;
 	padding-right: 10px;
 	padding-top: 10px;
@@ -4058,7 +3995,7 @@ border-bottom: 1px solid #2A180B;
   text-align: right;
   border-bottom: 1px dotted #2A180B;
   margin-bottom: 10px;
-  
+
 }
 
 .front .blogteaser{
@@ -4072,7 +4009,7 @@ border-bottom: 1px solid #2A180B;
 	-webkit-border-radius: 10px;
 	margin-bottom: 10px;
 	width: 95%;
-	
+
 }
 
 .blogteaser{
@@ -4086,8 +4023,8 @@ border-bottom: 1px solid #2A180B;
 	-webkit-border-radius: 10px;
 	margin-bottom: 10px;
 	width: 96%;
-	
-	
+
+
 }
 
 .blogteaser a{
@@ -4147,9 +4084,9 @@ font-family: Arial;
     -moz-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
     -o-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
     text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);}
-    
 
-    
+
+
 .release-desc{
 
 }

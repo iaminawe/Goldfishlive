@@ -1,4 +1,4 @@
-/* @override 
+/* @override
 	http://www.goldfishlive.com/sites/all/themes/singular/style.css?i
 	http://goldfishlive.com/sites/all/themes/singular/style.css?i
 	http://goldfishlive.com/sites/all/themes/singular/style.css?m
@@ -45,8 +45,8 @@ top: 110px;
  -moz-border-radius:10px;
 
   }
-  
-  
+
+
 #sidebarleft {
 -moz-border-radius:5px;
 
@@ -79,9 +79,9 @@ left: 22px;
 
   background: rgba(25,25,25) url(images/mask.png);
   background: rgba(25,25,25,0.7) url(images/mask.png);
-  
-  
-  
+
+
+
   width:600px;
     z-index: 2;
     position: relative;
@@ -152,7 +152,7 @@ a {
 
 a:link,
 a:visited {
-  
+
  color: #ff8500;
 }
 
@@ -169,7 +169,7 @@ h1, h2, h3, h4, h5, h6 {
 
   font-weight: normal;
   line-height: 100%;
-  
+
 
 }
 
@@ -178,15 +178,15 @@ h1,
 h1.title {
   font-size: 250%;   /* 30px/12px */
   color: #FFF;
- 
-  
+
+
 }
 
 h2 {
   font-size: 300%;   /* 24px/12px */
   padding-bottom:10px;
    font-family:  Arial, Helvetica, Geneva, sans-serif;
- 
+
 }
 
 #HomeBlog h2.title{
@@ -194,7 +194,7 @@ h2 {
 
 	  font-family: Arial, Helvetica, Geneva, sans-serif;
 	}
-	
+
 h2.title{
 	  font-family: Arial, Helvetica, Geneva, sans-serif;
 }
@@ -280,7 +280,7 @@ background: rgba(255, 255, 255, 0.6);
 /**
  * Tabs ===============================================================
  */
-div.page-header { padding: 0 20px; 
+div.page-header { padding: 0 20px;
 }
 
 div.page-header ul.links {
@@ -300,7 +300,7 @@ div.page-header ul.links li.active a {
  * Page content =======================================================
  */
 #page #content {
-  
+
 
 /* Fallback for web browsers that doesn't support RGBa */
 
@@ -315,7 +315,7 @@ background: rgba(248,248,248,0.5) url(../../../default/files/_bgnoise.png);
   -webkit-border-radius: 10px;
   float: left;
   width: 540px;
-  
+
   }
 
 #page #content div.block {
@@ -497,7 +497,7 @@ ul.links li {
 color: rgba(255,254,255);
 /*actual*/
 color: rgba(255,254,255,0.5);
-	
+
 }
 
 .node ul.links {
@@ -594,7 +594,7 @@ table.views-view-grid .views-field-title {
 
 
 #sidebar .block-title{
-	
+
 	font-size: 200%;
 
 	margin-bottom: 5px;
@@ -689,7 +689,7 @@ clear: both;
 	position: relative;
 	top: 10px;
 
-	
+
 }
 
 
@@ -740,7 +740,7 @@ ul li ul li ul li {
 
 .node .content ul {
   margin: 0 0 10px 30px;
-  
+
 }
 
 .node .content ul li {
@@ -774,7 +774,7 @@ blockquote {
   border: 0;
   margin-bottom: 0;
   padding: 0;
-  
+
 }
 
 
@@ -797,7 +797,7 @@ blockquote {
 
 /* Header top region */
 .header-top-region {
- 
+
   padding: 20px 0 0 0;
 }
 
@@ -826,7 +826,7 @@ blockquote {
 .header-group .inner {
   color: #b0b0b0;
 
-  
+
 }
 
 .header-wrapper .header a:link,
@@ -924,7 +924,7 @@ blockquote {
 #logo {
   float: left;
   margin: 0 10px 0 0;
-   
+
 }
 
 #slogan {
@@ -938,7 +938,7 @@ blockquote {
 }
 
 /* Primary Menu
-/-------------------------------------------------------------- 
+/--------------------------------------------------------------
 #header-image{
 background-image: url(../../../default/files/colouredballs2.png);
 width: 100%;
@@ -981,7 +981,7 @@ position: relative;
 .view-calendar li.views-row{
 		border-bottom: 1px dotted #d5d5d5;
 		color: rgba(254,255,254,0.5);
-		
+
 }
 
 .item-list li{
@@ -1043,7 +1043,7 @@ position: relative;
 	padding-right: 10px;
 	padding-top: 0px;
 	padding-bottom: 10px;
-	
+
 }
 
 
@@ -1157,8 +1157,8 @@ height: 250px;
 -------------------------------------------------------------- */
 
 .views-showcase {
-		-moz-border-radius: 10px;		
-		-khtml-border-radius: 10px;				
+		-moz-border-radius: 10px;
+		-khtml-border-radius: 10px;
 		-webkit-border-radius: 10px;
 		border-radius: 10px;
 		background-color: white;
@@ -1167,7 +1167,7 @@ height: 250px;
 		width: 530px;
 		height:300px;
 position: relative;
-	
+
 	font-style: italic;
 }
 
@@ -1255,7 +1255,7 @@ position: relative;
   height: 40px;
   z-index: 3;
   float: left;
-  
+
 }
 
 .views-showcase-big-panel .views-showcase-title a {
@@ -1310,31 +1310,31 @@ background: transparent;
 }
 
 .sf-breadcrumb{
-	
+
 }
 #menu-6933-1 ul{
-  
+
    left: 140px;
    width: 240px;
    padding-bottom: 5px;
    padding-left: 5px !important;
    font-size: 11px;
-   
+
 }
 
 
 #menu-9530-1 ul{
-  
+
    left: 190px;
    width: 355px;
     padding-bottom: 0;
    padding: 0 !important;
    font-size: 11px;
-   
+
 }
 
 #menu-9560-1 ul{
-    
+
    left: 320px;
    width: 280px;
    padding: 0 !important;
@@ -1343,7 +1343,7 @@ background: transparent;
 
 
 #menu-8160-1 ul{
- 
+
    left: 30px;
    width: 190px;
    padding: 0 !important;
@@ -1351,7 +1351,7 @@ background: transparent;
 }
 
 .sf-item-4 ul{
- 
+
 }
 .sf-navbar {
 
@@ -1421,7 +1421,7 @@ font-family: Helvetica;
 .sf-navbar a, .sf-navbar a:visited {
   border: none;
 
-  
+
 }
 ul.sf-navbar .current ul,
 ul.sf-navbar ul li:hover ul,
@@ -1438,7 +1438,7 @@ ul.sf-navbar .current ul ul {
 }
 .sf-navbar li li.current > a {
   font-weight: bold;
- 
+
 }
 /*** Point all arrows down ***/
 .sf-navbar ul .sf-sub-indicator {
@@ -1498,13 +1498,13 @@ background: rgba(20,21,21);
 }
 .sf-menu.sf-style-light-blue li,
 .sf-navbar.sf-style-light-blue {
-  
+
   /*fallback*/
 background: rgba(20,21,21);
 background: rgba(20,21,21,0.9);
-  
- 
-  
+
+
+
 }
 
 .sf-menu.sf-style-light-blue li li {
@@ -1512,11 +1512,11 @@ margin-top: 5px;
 background-color: rgba(20,21,21);
 background-color: rgba(20,21,21,0.9);
 	text-transform: none;
-	
-	
+
+
 }
 .sf-menu.sf-style-light-blue li li a:hover{
-	
+
 background-color: rgba(247,247,247);
 background-color: rgba(247,247,247,0.5);
 color: black;
@@ -1549,7 +1549,7 @@ margin-left: 0;
 }
 .sf-navbar.sf-style-light-blue li ul li ul {
   background-color: transparent;
-  
+
 }
 .sf-menu.sf-style-light-blue .sf-sub-indicator {
 
@@ -1576,12 +1576,12 @@ margin-left: 0;
 thead th,
 th {
   background: #e8e8e8;
- 
+
   padding: 3px 10px;
 }
 
 tbody th {
- 
+
 }
 
 tr.even,
@@ -1662,7 +1662,7 @@ ul.pager li a:focus {
   background-color: #888;
   color: #fff;
   text-decoration: none;
-  
+
 }
 
 ul.pager li.pager-first a,
@@ -1969,7 +1969,7 @@ img.category {
 
 ul.links.inline.uc-categories {
   display: block ;
- 
+
 }
 
 ul.uc-categories {
@@ -2308,8 +2308,8 @@ float: left;
 #musicplayer{
 width: 300px;
 padding:5px;
--moz-border-radius: 10px;		
--khtml-border-radius: 10px;				
+-moz-border-radius: 10px;
+-khtml-border-radius: 10px;
 -webkit-border-radius: 10px;
 border-radius: 10px;
 background-color: rgba(255,255,255);
@@ -2359,8 +2359,8 @@ background: rgba(0,0,0,0.7);
   -webkit-border-radius: 5px;
   border-radius:5px;
   top: -10px;
- 
-  
+
+
 
 }
 
@@ -2372,8 +2372,8 @@ div.jp-interface ul.jp-controls {
 
 }
 div.jp-interface ul.jp-controls li {
-  
-  
+
+
 }
 div.jp-interface ul.jp-controls a {
   display: block;
@@ -2452,7 +2452,7 @@ div.jp-progress {
   width: 70px;
   height: 10px;
 
- 
+
 }
 div.jp-single-player div.jp-progress {
   left: 130px;
@@ -2476,13 +2476,13 @@ a.jp-volume-min {
   top: 32px;
   width: 18px;
   height: 15px;
-  
+
 }
 div.jp-single-player a.jp-volume-min {
 
 }
 div.jp-playlist-player a.jp-volume-min {
- 
+
 }
 a.jp-volume-min:hover {
   background: url(../../modules/jplayer/theme/jplayer.jpg) -19px -170px no-repeat;
@@ -2495,7 +2495,7 @@ a.jp-volume-max {
   left: 170px;
 }
 div.jp-single-player a.jp-volume-max {
-  
+
 }
 div.jp-playlist-player a.jp-volume-max {
 
@@ -2517,7 +2517,7 @@ left: 140px;
 div.jp-single-player div.jp-volume-bar {
   }
 div.jp-playlist-player div.jp-volume-bar {
- 
+
 }
 div.jp-volume-bar-value {
   background: url(../../modules/jplayer/theme/jplayer.jpg) 0 -255px repeat-x;
@@ -2533,7 +2533,7 @@ div.jp-total-time {
   font-style: oblique;
   color: orange;
   left: 90px;
- 
+
 }
 div.jp-total-time {
   text-align: right;
@@ -2541,11 +2541,11 @@ div.jp-total-time {
 }
 div.jp-single-player div.jp-play-time,
 div.jp-single-player div.jp-total-time {
- 
+
 }
 div.jp-playlist-player div.jp-play-time,
 div.jp-playlist-player div.jp-total-time {
- 
+
 }
 div.jp-playlist {
 width: 100%;
@@ -2570,7 +2570,7 @@ div.jp-single-player div.jp-playlist li {
   margin: 0;
   font-weight: bold;
   background: none;
- 
+
 
 }
 div.jp-playlist-player div.jp-playlist li {
@@ -2620,14 +2620,14 @@ div.jp-playlist-player div.jp-playlist a.jplayer_playlist_current {
 	text-align: center;
 	font-weight: bold;
 	font-size: 11px;
-	
+
 }
 .calendar-calendar div.date-nav{
 	padding: 5px;
-	
+
 }
 .calendar-calendar div.month-view{
-	
+
 }
 .calendar-calendar a{
 text-decoration:none;
@@ -2683,7 +2683,7 @@ padding: 5px;
 -moz-border-radius: 5px;
 -webkit-border-radius:5px;
 
-	
+
 }
 
 /* @end */
@@ -2740,7 +2740,7 @@ padding: 5px;
 a.follow-link-facebook{
 	background-image: url(../../../default/files/icons/fb24x24.png);
 
-	
+
 }
 a.follow-link-myspace{
 	background-image: url(../../../default/files/icons/myspace24x24.png);
@@ -3144,10 +3144,10 @@ ul.playlist div.sm2-filelink li.sm2_paused a {
 }
 
 
-.read-more{ 
-margin-top: 10px; float: right ; background: rgba(255,255,255,0.7); padding: 4px 8px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;  color: white; font-size: 12px; text-decoration: none; vertical-align: middle; } 
+.read-more{
+margin-top: 10px; float: right ; background: rgba(255,255,255,0.7); padding: 4px 8px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;  color: white; font-size: 12px; text-decoration: none; vertical-align: middle; }
 
-.read-more:hover { border-top-color: #087fcf; color:#ccc; } 
+.read-more:hover { border-top-color: #087fcf; color:#ccc; }
 
 .read-more:active { border-top-color: #1b435e; background: #orange; }
 
@@ -3167,7 +3167,7 @@ margin-top: 10px; float: right ; background: rgba(255,255,255,0.7); padding: 4px
 
 
 .field-field-singleheaderimage{
-	
+
 	position: relative;
 	float: left;
 	padding-right: 10px;
@@ -3236,7 +3236,7 @@ padding-bottom: 10px;
 	height: 180px;
 	font-size: 11px;
 	margin-right: 3px;
-	
+
 }
 
 .videothumbwrap{
@@ -3245,7 +3245,7 @@ padding-bottom: 10px;
 	height: 180px;
 	font-size: 11px;
 	margin-right: 5px;
-	
+
 }
 
 /* @end */
@@ -3260,7 +3260,7 @@ padding-bottom: 10px;
 
 /* Bellow th e list of tweets "<li>" */
 
-#juitterContainer .twittLI{list-style:none;margin:0;padding:5px 0 0 0;border-bottom:dashed 1px #999;padding:3px;clear:both;height:100px; line-height: 15px; font-size: 11px;} 
+#juitterContainer .twittLI{list-style:none;margin:0;padding:5px 0 0 0;border-bottom:dashed 1px #999;padding:3px;clear:both;height:100px; line-height: 15px; font-size: 11px;}
 #juitterContainer .twittLI:hover{background:#444;}
 #juitterContainer .twittList SPAN.time{color:#777;font-size:0.9em}
 #juitterContainer .twittList A{color: #ff7c00;} /*Links inside the tweets list */
@@ -3271,7 +3271,8 @@ padding-bottom: 10px;
 #juitterContainer .jRM{float:right;clear:both} /*read it on twitter link*/
 #juitterContainer .extLink{} /*CSS for the external links*/
 #juitterContainer .hashLink{} /*CSS for the hash links*/
-/* Bellow the CSS for the search box */
+
+/* Bellow the CSS for the search box */
 
 #juitterSearch {margin:0 0 2em 0.5em;}
 #juitterSearch input {border:1px solid #aaa; padding:0.5em;width:30em;}
@@ -3302,7 +3303,7 @@ float: left;
 
 .attachment-before{
 	padding-bottom: 10px;
-	
+
 
 	margin-bottom: 10px;
 }
@@ -3338,7 +3339,7 @@ float: left;
 }
 
 .newsitem{
-	
+
 	float: left;
 	background-color: rgba(252,255,255,0.5);
 	padding:10px;
@@ -3348,13 +3349,13 @@ float: left;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	margin-bottom: 10px;
-	
+
 }
 
 .eventitem{
 	position: relative;
 	float: left;
-	-moz-border-radius: 10px;		
+	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	margin-bottom: 10px;
@@ -3418,7 +3419,7 @@ a.shoplinks{
 	float: left;
 	position: relative;
 		top: 10px;
-	
+
 	}
 .release-info ul{
 	position: relative;
@@ -3459,5 +3460,9 @@ left: 140px;
 
 .page-front .page-header{
 	display: none;
+}
+
+#block-block-14 .input{
+  background-image: white;
 }
 

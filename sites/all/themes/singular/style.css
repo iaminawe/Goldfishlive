@@ -1,4 +1,12 @@
-
+/* @override
+	http://goldfishlive.com/sites/all/themes/singular/style.css?g
+	http://goldfishlive.com/sites/all/themes/singular/style.css?y
+	http://goldfishlive.com/sites/all/themes/singular/style.css?i
+	http://goldfishlive.com/sites/all/themes/singular/style.css?h
+	http://goldfishlive.com/sites/all/themes/singular/style.css?K
+	http://goldfishlive.com/sites/all/themes/singular/style.css?k
+	http://goldfishlive.com/sites/all/themes/singular/style.css?D
+*/
 
 body {
   color: #421e00;
@@ -32,7 +40,6 @@ left: 5px;
  -moz-border-radius:10px;
 
   }
-
 
  #block-block-10{
 clear: both;
@@ -74,7 +81,6 @@ top: 10px;
 
   background: rgba(25,25,25) url(images/mask.png);
   background: rgba(25,25,25,0.7) url(images/mask.png);
-
 
  top: 10px;
 
@@ -159,7 +165,6 @@ a {
 
 }
 
-
 a:link,
 a:visited {
 
@@ -172,18 +177,6 @@ a:focus,
 a:active {
  color: white;
   text-decoration: none;
-}
-a:link,
-a:visited {
- color: #ff8500;
-}
-
-a:hover,
-a:focus,
-a:active {
- color: orange;
-  text-decoration: none;
-
 }
 
 
@@ -200,14 +193,6 @@ h1, h2, h3, h4, h5, h6 {
 h1,
 h1.title {
   font-size: 250%;   /* 30px/12px */
-
-
-}
-
-
-h1,
-h1.title {
-  font-size: 250%;   /* 30px/12px */
   color: #FFF;
 
 
@@ -217,9 +202,7 @@ h2 {
   font-size: 300%;   /* 24px/12px */
   padding-bottom:10px;
    font-family:  Arial, Helvetica, Geneva, sans-serif;
-
  line-height: 90%;
-
 }
 
 #HomeBlog h2.title{
@@ -256,6 +239,8 @@ h4 {
   line-height:100%;
   padding-bottom: 5px;
 }
+
+
 
 h4.title a{
   z-index: 999;
@@ -338,25 +323,15 @@ div.page-header ul.links li.active a {
 #page #content {
 
 
-
-/* Fallback for web browsers that doesn't support RGBa */
-
-background: rgb(248, 248, 248);
-
-
-
   padding:19px 20px 20px;
   -moz-border-radius:10px;
   -webkit-border-radius: 10px;
   float: left;
   width: 540px;
-
 background-color: #F68E1D;
 margin-top: 5px;
 
 }
-
-
 
 #page #content div.block {
   margin:20px 0px 0px;
@@ -952,145 +927,6 @@ blockquote {
 .search-box-inner .searchButtonPng {
   margin: -1px 0 0 10px;
   padding: 0;
-
-
-}
-
-
-/* Header Regions
--------------------------------------------------------------- */
-
-/* Header Group */
-
-/* Header Top */
-.header-top-wrapper {
-
-  float: left;
-  min-height: 32px;
-}
-
-.header-top {
-  overflow: visible;
-  position: relative;
-}
-
-/* Header top region */
-.header-top-region {
-
-  padding: 20px 0 0 0;
-}
-
-.header-top-region a:link,
-.header-top-region a:visited,
-.header-top-region a:hover,
-.header-top-region a:focus {
-  color: #fff;
-}
-
-/* Header Site Info */
-.header-site-info {
-  margin: 0;
-  width: auto;
-}
-
-.header-site-info-inner {
-  float: left;
-}
-
-/* Header Wrapper */
-.header-group .block {
-  margin: 0;
-}
-
-.header-group .inner {
-  color: #b0b0b0;
-
-
-}
-
-.header-wrapper .header a:link,
-.header-wrapper .header a:visited {
-  color: #fff;
-}
-
-
-/* Header Regions - Secondary menu
--------------------------------------------------------------- */
-.secondary-menu {
-  margin-bottom: 0;
-  width: auto;
-}
-
-.secondary-menu-inner ul.links {
-  float: none;
-  margin: 0;
-}
-
-.secondary-menu-inner ul.links li a:link,
-.secondary-menu-inner ul.links li a:visited {
-  border-left: 1px solid #353535;
-  color: #c7c7c7;
-  display: block;
-  float: left;
-  padding: 7px 10px 7px 10px;
-}
-
-.secondary-menu-inner ul.links li.last a {
-  border-right: 1px solid #353535;
-}
-
-.secondary-menu-inner ul.links li a:hover,
-.secondary-menu-inner ul.links li a:focus {
-
-  text-decoration: none;
-}
-
-.secondary-menu-inner ul.links li a.active {
-
-}
-
-
-/* Header Regions - Search
--------------------------------------------------------------- */
-.search-box {
-  float: right;
-  margin-bottom: 0;
-  overflow: visible;
-  width: auto;
-}
-
-.search-box-inner {
-  float: right;
-  width: 232px;
-}
-
-.search-box-inner form#search-theme-form {
-  background: url(../images/search-bg.png) no-repeat top center;
-  height: 35px;
-  position: absolute;
-  right: 0;
-  top: 5px;
-  width: 232px;
-  z-index: 10;
-}
-
-.search-box-inner #search-input {
-  padding: 8px 0 0 10px;
-}
-
-.search-box-inner input#edit-search-theme-form {
-  background: none;
-  border: none;
-  color: #333;
-  float: left;
-  margin: 0;
-  padding: 0;
-  width: 185px;
-}
-
-.search-box-inner .searchButtonPng {
-  margin: -1px 0 0 10px;
-  padding: 0;
 }
 
 .search-box-inner #search-input input {
@@ -1118,34 +954,6 @@ left: 205px;
 
 /* Primary Menu
 /--------------------------------------------------------------
-
-
-.search-box-inner #search-input input {
-  margin: 2px 0 0 0;
-}
-
-/* Site Info
--------------------------------------------------------------- */
-
-#logo {
-  float: left;
-  margin: 0 10px 0 0;
-
-}
-
-#slogan {
-  color: #acacac;
-  float: left;
-  font-style: italic;
-}
-
-#site-name-slogan {
-  float: left;
-}
-
-/* Primary Menu
-/--------------------------------------------------------------
-
 #header-image{
 background-image: url(../../../default/files/colouredballs2.png);
 width: 100%;
@@ -1462,10 +1270,8 @@ position: relative;
   height: 30px;
   z-index: 3;
   float: left;
-
   display: block;
     background-color: #FFF;
-
 }
 
 .views-showcase-big-panel .views-showcase-title a {
@@ -1821,40 +1627,10 @@ tr.drag td,
 tr.drag-previous td {
   background: #ffd;
 }
-/* Tables
-/-------------------------------------------------------------- */
-thead th,
-th {
-  background: #e8e8e8;
-
-  padding: 3px 10px;
-}
-
-tbody th {
-
-}
-
-tr.even,
-tr.odd {
-  background: transparent;
-}
-
-tr.even td,
-tr.odd td {
-  background: transparent;
-
-}
-
-tr.drag td,
-tr.drag-previous td {
-  background: #ffd;
-
-}
 
 /* @end */
 
 /* @group Pagers */
-
 
 /* Pagers
 -------------------------------------------------------------- */
@@ -1899,64 +1675,6 @@ ul.pager li.pager-current {
 ul.pager li a:link,
 ul.pager li a:visited {
 
-  color: #fff;
-  margin: 3px 0 0 0;
-  text-decoration: none;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-}
-
-ul.pager li a:hover,
-ul.pager li a:focus {
-  background-color: #888;
-  color: #fff;
-
-/* Pagers
--------------------------------------------------------------- */
-
-ul.pager {
-  margin: 10px 0;
-  background-color: #ebebeb;
-  padding: 9px 5px 5px 5px;
-  border: 1px solid #cecece;
-  border-left: 1px solid #d9d9d9;
-  border-right: 1px solid #d9d9d9;
-  border-bottom: 1px solid #fff;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-}
-
-ul.pager li {
-  display: block;
-  margin: 0 5px 0 0;
-  float: left;
-}
-
-ul.pager li a,
-ul.pager li.pager-current {
-  background-color: #aaa;
-  color: #fff;
-  padding: 3px 8px;
-  text-transform: uppercase;
-}
-
-ul.pager li.pager-current {
-  background-color: #f3f3f3;
-  border: 1px solid #cecece;
-  border-top: none;
-  color: #acacac;
-  display: block;
-  font-weight: bold;
-  height: 22px;
-  margin: -10px 5px 0 0;
-  padding: 7px 8px 0 8px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-}
-
-ul.pager li a:link,
-ul.pager li a:visited {
-  border: 1px solid #a8a8a8;
   color: #fff;
   margin: 3px 0 0 0;
   text-decoration: none;
@@ -3332,244 +3050,6 @@ ul.playlist li .timing {
  letter-spacing:0px;
  font:44% monaco,"VT-100",terminal,"lucida console",courier,system;
  line-height:1em;
-/*
-
- SoundManager 2: "page as playlist" example
- ------------------------------------------
- http://schillmania.com/projects/soundmanager2/
-
- Modified for Drupal integration by davebv
- http://www.davebv.com
-
-*/
-
-.spectrum-container {
- display:none;
-}
-
-ul.use-spectrum li.sm2_playing .spectrum-container {
- position:absolute;
- left:0px;
- top:0px;
- margin-left:-266px;
- margin-top:-1px;
- display:block;
- background-color:#5588bb;
- border:1px solid #99ccff;
- -moz-border-radius:4px;
- -webkit-border-radius:4px;
- border-radius:4px;
-}
-
-ul.use-spectrum .spectrum-box {
- position:relative;
- width:255px;
- font-size:1em;
- padding:2px 0px;
- height:1.2em;
- overflow:hidden;
-}
-
-ul.use-spectrum .spectrum-box .spectrum {
- position:absolute;
- left:0px;
- top:-2px;
- margin-top:20px;
- display:block;
- font-size:1px;
- width:1px;
- height:1px; /* set to 50px for a thick line, 1px for a thin line, etc. */
- overflow:hidden;
- background-color:#fff;
-}
-
-.sm2_plst_cck-outer ul.playlist {
- list-style-type: none;
- margin:0px;
- padding:0px;
-
-}
-
-.sm2_plst_cck-outer ul.playlist li {
- /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
- position:relative;
- display:block;
- width:auto;
- font-size:1.1em;
- color:#666;
- margin:0;
- padding:0.25em 0.5em 0.25em 0.5em;
- border:none;
- letter-spacing:0.06em; /* ZOMG WEB X.0. ;) */
- background-color:#f9f9f9;
- background-image: none;
- -webkit-transition-property: hover;
- -webkit-transition: background-color 0.15s ease-in-out;
-}
-
-ul.playlist li a {
- display:block;
- text-decoration:none;
- font-weight:normal;
- color:#000;
- font-size:120%;
- outline:none;
- position:relative;
- z-index:2;
-}
-
-ul.playlist li.sm2_playing,
-ul.playlist li.sm2_paused,
-ul.playlist li.sm2_playing a {
- color:#fff;
- border-radius:3px;
- -webkit-border-radius:3px;
- -moz-border-radius:3px;
-}
-
-ul.playlist li:hover {
- background-color:#eee;
-}
-
-ul.playlist li:hover a {
- color:#333;
-}
-
-ul.playlist li.sm2_playing,
-ul.playlist li.sm2_playing:hover {
- background-color: #f68f20;
-}
-
-ul.playlist li.sm2_paused {
- background-color:#999;
-}
-
-ul.playlist li.sm2_playing:hover a,
-ul.playlist li.sm2_paused a {
- color:#fff;
-}
-
-ul.playlist li .controls {
- display:none;
-}
-
-ul.playlist li .peak,
-ul.playlist.use-peak li .peak {
- display:none;
- position:absolute;
- top:0.55em;
- right:0.5em;
-}
-
-ul.playlist li.sm2_playing .controls,
-ul.playlist li.sm2_paused .controls {
- position:relative;
- display:block;
-}
-
-ul.playlist.use-peak li.sm2_playing .peak,
-ul.playlist.use-peak li.sm2_paused .peak {
- display:inline;
- display:inline-block;
-}
-
-ul.playlist.use-peak li .peak {
- display:none; /* IE 7 */
-}
-
-ul.playlist li.sm2_paused .controls {
- background-color:#666;
-}
-
-ul.playlist li:hover .controls .statusbar {
- position:relative;
- cursor:ew-resize;
- cursor:-moz-grab;
- cursor:grab;
-}
-
-ul.playlist li.sm2_paused .controls .statusbar {
- background-color: #ffc009;
-}
-
-ul.playlist li .controls {
- position:relative;
- margin-top:0.25em;
- margin-bottom:0.25em;
- background-color:#99ccff;
-}
-
-ul.playlist li .controls .statusbar {
- position:relative;
- height:0.5em;
- background-color: #fff;
- border:none;
- border-radius:2px;
- -moz-border-radius:2px;
- -webkit-border-radius:2px;
- overflow:hidden;
- cursor:-moz-grab;
- cursor:grab;
-}
-
-ul.playlist li .controls.dragging .statusbar {
- cursor:-moz-grabbing;
- cursor:grabbing;
-}
-
-ul.playlist li .controls .statusbar .position,
-ul.playlist li .controls .statusbar .loading,
-ul.playlist li .controls .statusbar .annotation {
- position:absolute;
- left:0px;
- top:0px;
- height:0.5em;
-}
-
-ul.playlist li .controls .statusbar .position {
- background-color: #f37421;
- border-right:3px solid #336699;
- border-radius:3px;
- -moz-border-radius:3px;
- -webkit-border-radius:3px;
-}
-
-ul.playlist li.sm2_paused .controls .statusbar .position {
- background-color:#666;
- border-color:#666;
-}
-
-ul.playlist li .controls .statusbar .loading {
- background-color: #ffc009;
-}
-
-ul.playlist li .controls .statusbar .position,
-ul.playlist li .controls .statusbar .loading {
- width:0px;
-}
-
-ul.playlist li.sm2_playing a.sm2_link,
-ul.playlist li.sm2_paused a.sm2_link {
- margin-right:4.5em; /* room for timing stuff */
-}
-
-ul.playlist li .timing {
- position:absolute;
- display:none;
- text-align:right;
- right:1em;
- top:1em;
- width:auto;
- height:1em;
- padding:3px 5px;
- background-color:#ffc009;
- border:1px solid #ffc009;
- -moz-border-radius:4px;
- -khtml-border-radius:4px;
- border-radius:4px;
- letter-spacing:0px;
- font:44% monaco,"VT-100",terminal,"lucida console",courier,system;
- line-height:1em;
  vertical-align:middle;
  color: black;
 }
@@ -3694,6 +3174,7 @@ ul.playlist div.sm2-filelink li.sm2_paused a {
   text-transform: lowercase;
 }
 
+
 .read-more{
 margin-top: 10px;
 float: right;
@@ -3731,14 +3212,6 @@ float: right;
 {
      color: white !important;
 }
-
-.read-more{
-margin-top: 10px; float: right ; background: rgba(255,255,255,0.7); padding: 4px 8px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;  color: white; font-size: 12px; text-decoration: none; vertical-align: middle; }
-
-.read-more:hover { border-top-color: #087fcf; color:#ccc; }
-
-.read-more:active { border-top-color: #1b435e; background: #orange; }
-
 
 /* @end */
 
@@ -3847,7 +3320,6 @@ padding-bottom: 10px;
 
 /*JUITTER PLUGIN CSS*/
 
-
 #juitterContainer{} /*Juitter container*/
 
 #juitterContainer ul.twittList{margin:0;padding:5px;} /* UL that will contain the list of tweets */
@@ -3858,26 +3330,6 @@ padding-bottom: 10px;
 #juitterContainer .twittLI:hover{background-color:#D37919;}
 #juitterContainer .twittList SPAN.time{color:#777;font-size:0.9em}
 #juitterContainer .twittList A{color: #fceecc;} /*Links inside the tweets list */
-
-/* Bellow the CSS for the avatar image  */
-
-#juitterContainer .juitterAvatar{float:left;border:solid 1px #aaa;background:#fff;margin-right:5px;padding:2px;width:40px;height:40px;}
-#juitterContainer .jRM{float:right;clear:both} /*read it on twitter link*/
-#juitterContainer .extLink{} /*CSS for the external links*/
-#juitterContainer .hashLink{} /*CSS for the hash links*/
-
-/* Bellow the CSS for the search box */
-
-#juitterContainer{} /*Juitter container*/
-
-#juitterContainer ul.twittList{margin:0;padding:5px;} /* UL that will contain the list of tweets */
-
-/* Bellow th e list of tweets "<li>" */
-
-#juitterContainer .twittLI{list-style:none;margin:0;padding:5px 0 0 0;border-bottom:dashed 1px #999;padding:3px;clear:both;height:100px; line-height: 15px; font-size: 11px;}
-#juitterContainer .twittLI:hover{background:#444;}
-#juitterContainer .twittList SPAN.time{color:#777;font-size:0.9em}
-#juitterContainer .twittList A{color: #ff7c00;} /*Links inside the tweets list */
 
 /* Bellow the CSS for the avatar image  */
 
@@ -3974,9 +3426,6 @@ color: orange !important;
 .eventitem{
 	position: relative;
 	float: left;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
 
 	margin-bottom: 10px;
 	padding-right: 10px;

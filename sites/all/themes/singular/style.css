@@ -3588,5 +3588,8 @@ left: 140px;
 
 #block-block-14 input{
   background: white !important;
+  margin-top:10px;
+  margin-bottom:10px;
+  padding:5px;
 }
 
